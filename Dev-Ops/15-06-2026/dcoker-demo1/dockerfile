@@ -1,0 +1,20 @@
+# Step 1: base image
+FROM node:24
+
+# Step 2: create app directory
+WORKDIR /app
+
+# Step 3: copy package files
+COPY package*.json ./
+
+# Step 4: install dependencies
+RUN npm install
+
+# Step 5: copy rest of app
+COPY . .
+
+# Step 6: expose port
+EXPOSE 3000
+
+# Step 7: start app
+CMD ["node", "index.js"]
