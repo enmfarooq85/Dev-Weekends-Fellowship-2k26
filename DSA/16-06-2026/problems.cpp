@@ -87,3 +87,71 @@
 //         return result;
 //     }
 // };
+
+// https://leetcode.com/problems/find-the-difference-of-two-arrays/
+
+// T.C => O(n + m)
+// S.C => O(n + m)
+
+// class Solution {
+// public:
+//     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+//         unordered_set<int> s1(nums1.begin(), nums1.end());
+//         unordered_set<int> s2(nums2.begin(), nums2.end());
+
+//         vector<vector<int>> result(2);
+
+//         for (int x : s1) {
+//             if (s2.find(x) == s2.end()) {
+//                 result[0].push_back(x);
+//             }
+//         }
+
+//         for (int x : s2) {
+//             if (s1.find(x) == s1.end()) {
+//                 result[1].push_back(x);
+//             }
+//         }
+
+//         return result;
+//     }
+// };
+
+// T.C => O((n + m) log(n + m))
+// S.C => O(n + m)
+
+// class Solution {
+// public:
+//     vector<vector<int>> findDifference(vector<int>& nums1, vector<int>& nums2) {
+//         vector<vector<int>> ans;
+//         map<int, int> mp1, mp2;
+//         // value: freqquency
+//         for (auto i : nums1) mp1[i]++;
+//         for (auto j : nums2) mp2[j]++;
+
+//         // nums1 - nums2 
+//         set<int> set1;
+//         vector<int> temp1;
+//         for (auto i : nums1){
+//             if (mp1[i] > 0 && mp2.count(i) == 0){
+//                 set1.insert(i);
+//             }
+//         }
+
+//         set<int> set2;
+//         vector<int> temp2;
+//         for (auto i : nums2){
+//             if (mp2[i] > 0 && mp1.count(i) == 0){
+//                 set2.insert(i);
+//             }
+//         }
+
+//         for (auto i : set1) temp1.push_back(i);
+//         for (auto j : set2) temp2.push_back(j);
+        
+
+//         ans.push_back(temp1);
+//         ans.push_back(temp2);
+//         return ans;
+//     }
+// };
