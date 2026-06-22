@@ -155,3 +155,43 @@
 //         return ans;
 //     }
 // };
+
+// https://leetcode.com/problems/number-of-good-pairs/description/
+
+// class Solution {
+// public:
+//     int numIdenticalPairs(vector<int>& nums) {
+//         unordered_map<int, int> mp = {};
+
+//         for (auto i : nums) {
+//             mp[i]++;
+//         }
+
+//         int count = 0;
+//         for (auto j : mp) {
+//             // nC2:
+//             count += (j.second * (j.second - 1)) / 2;
+//         }
+
+//         return count;
+//     }
+// };
+
+// https://leetcode.com/problems/missing-number/
+
+// class Solution {
+// public:
+//     int missingNumber(vector<int>& nums) {
+//         int n = nums.size();
+
+//         // ∑n 
+//         int expectedSum = n * (n + 1) / 2;
+
+//         int actualSum = 0;
+//         for (int num : nums) {
+//             actualSum += num;
+//         }
+
+//         return expectedSum - actualSum;
+//     }
+// };

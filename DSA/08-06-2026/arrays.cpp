@@ -148,48 +148,5 @@ int main()
 
     // linear Search: An algorithm for traversing on the array one by one and finding something from array.
 
-    // return the index of 103 element using linear search
-    int collogeID[4] = {101, 102, 103, 104};
-    for (int i = 0; i < sizeof(collogeID) / sizeof(int); i++)
-    {
-        if (collogeID[i] == 1003)
-        {
-            cout << i << endl;
-            return;
-        }
-    };
-
-    // LEETCODE PROBLEM:
-    // https://leetcode.com/problems/running-sum-of-1d-array/
-
-    // Understand the problem first:
-
-    // hme aik array dia gia hy nums name ka. aur uno ne running sum ko is trah define kia hy ke at the current position hum log zero se le kr us current position tk ja skte hy aur elements ko plus kr skte hy. hume running sum return krna hy nums array ka.
-
-    // Example: 01
-    vector<int> nums = {1, 2, 3, 4};
-    // looping over the vector array nums
-    vector<int> result = nums; // copy original array
-
-    // O(N)^2
-    for (int i = 0; i < nums.size(); i++)
-    {
-        int runningSum = 0;
-
-        for (int j = 0; j <= i; j++)
-        {
-            runningSum += nums[j];
-        }
-
-        result[i] = runningSum;
-    }
-
-    // O(N):
-    for (int i = 1; i < nums.size(); i++)
-    {
-        // yaha pe hum log just carrying sum ko le ke current me plus kr rahe jis se hmara solution linear me a raha hy. aur start bi one se kr rahe hy kyu ke agr one se krte tu pir us se pehle koi sum hy nahi that's why zero se start kr rahe hy.
-        nums[i] += nums[i - 1];
-    }
-
     return 0;
 }
