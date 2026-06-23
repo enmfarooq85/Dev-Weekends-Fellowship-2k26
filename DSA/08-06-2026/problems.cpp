@@ -96,3 +96,105 @@
 //         return result;
 //     }
 // };
+
+// https://leetcode.com/problems/top-k-frequent-elements/description/
+
+// T.C => O(n²)
+// S.C => O(m)
+
+// class Solution {
+// public:
+//     vector<int> topKFrequent(vector<int>& nums, int k) {
+//         unordered_map<int, int> mp = {};
+//         vector<int> ans;
+
+//         for (auto i : nums) {
+//             mp[i]++;
+//         }
+
+//         while (k > 0) {
+//             int mxFreq = -1;
+//             int mxNum = -1;
+
+//             for (auto j : mp) {
+//                 if (j.second > mxFreq) {
+//                     mxFreq = j.second;
+//                     mxNum = j.first;
+//                 }
+//             }
+//             cout << "key: " << mxNum << endl;
+//             cout << "value: " << mxFreq << endl;
+//             mp[mxNum] = -1;
+//             ans.push_back(mxNum);
+
+//             k--;
+//         }
+
+//         return ans;
+//     }
+// };
+
+// T.C => O(n + m log m)
+// S.C => O(m)
+
+// class Solution {
+// public:
+//     vector<int> topKFrequent(vector<int>& nums, int k) {
+//         unordered_map<int, int> freq;
+
+//         for (int num : nums) {
+//             freq[num]++;
+//         }
+
+//         vector<pair<int, int>> v;
+
+//         for (auto it : freq) {
+//             v.push_back({it.second, it.first});
+//         }
+
+//         sort(v.rbegin(), v.rend());
+
+//         vector<int> ans;
+//         for (int i = 0; i < k; i++) {
+//             ans.push_back(v[i].second);
+//         }
+
+//         return ans;
+//     }
+// };
+
+// // T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     vector<int> topKFrequent(vector<int>& nums, int k) {
+//         unordered_map<int, int> freq;
+
+//         for (int num : nums) {
+//             freq[num]++;
+//         }
+
+//         int n = nums.size();
+//         vector<vector<int>> bucket(n + 1);
+
+//         for (auto it : freq) {
+//             int number = it.first;
+//             int frequency = it.second;
+//             bucket[frequency].push_back(number);
+//         }
+
+//         vector<int> ans;
+
+//         for (int i = n; i > 0 && ans.size() < k; i--) {
+//             for (int num : bucket[i]) {
+//                 ans.push_back(num);
+//                 if (ans.size() == k) {
+//                     return ans;
+//                 }
+//             }
+//         }
+
+//         return ans;
+//     }
+// };
