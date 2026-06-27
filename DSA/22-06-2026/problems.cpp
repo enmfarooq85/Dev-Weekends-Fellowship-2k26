@@ -296,3 +296,138 @@
 //         return ans;
 //     }
 // };
+
+// https://leetcode.com/problems/rotate-array/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     void reverseArray(vector<int>& nums, int left, int right) {
+//         while (left < right) {
+//             int temp = nums[left];
+//             nums[left] = nums[right];
+//             nums[right] = temp;
+
+//             left++;
+//             right--;
+//         }
+//     }
+
+//     void rotate(vector<int>& nums, int k) {
+//         int n = nums.size();
+//         k %= n;
+
+//         // Reverse the entire array
+//         reverseArray(nums, 0, n - 1);
+
+//         // Reverse first k elements
+//         reverseArray(nums, 0, k - 1);
+
+//         // Reverse remaining elements
+//         reverseArray(nums, k, n - 1);
+//     }
+// };
+
+// T.C => O(n * k)
+// S.C => O(1)
+
+// Note:- TLE Soluttion...
+
+// class Solution {
+// public:
+//     void rotate(vector<int>& nums, int k) {
+//         int n = nums.size();
+//         k %= n;
+
+//         while (k--) {
+//             int last = nums[n - 1];
+
+//             for (int i = n - 1; i > 0; i--) {
+//                 nums[i] = nums[i - 1];
+//             }
+
+//             nums[0] = last;
+//         }
+//     }
+// };
+
+// https://leetcode.com/problems/compare-version-numbers/
+
+// T.C => O(n + m)
+// S.C => O(n + m)
+
+// class Solution {
+// public:
+//     int compareVersion(string version1, string version2) {
+//         vector<string> tokens1, tokens2;
+//         string token;
+
+//         stringstream ss1(version1);
+//         while (getline(ss1, token, '.')) {
+//             tokens1.push_back(token);
+//         }
+
+//         stringstream ss2(version2);
+//         while (getline(ss2, token, '.')) {
+//             tokens2.push_back(token);
+//         }
+
+//         int maxLength = max(tokens1.size(), tokens2.size());
+
+//         for (int i = 0; i < maxLength; i++) {
+//             int v1 = (i < tokens1.size()) ? stoi(tokens1[i]) : 0;
+//             int v2 = (i < tokens2.size()) ? stoi(tokens2[i]) : 0;
+
+//             if (v1 < v2)
+//                 return -1;
+//             if (v1 > v2)
+//                 return 1;
+//         }
+
+//         return 0;
+//     }
+// };
+
+// T.C => O(n + m)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     int compareVersion(string version1, string version2) {
+//         int i = 0, j = 0;
+//         int n = version1.size();
+//         int m = version2.size();
+
+//         while (i < n || j < m) {
+//             int num1 = 0;
+//             int num2 = 0;
+
+//             // Reading untill dot comes in
+//             while (i < n && version1[i] != '.') {
+//                 num1 = num1 * 10 + (version1[i] - '0');
+//                 i++;
+//             }
+
+//             // Reading untill dot comes in
+//             while (j < m && version2[j] != '.') {
+//                 num2 = num2 * 10 + (version2[j] - '0');
+//                 j++;
+//             }
+
+//             // now we have token from v1 and v2, we should compare them.
+//             if (num1 < num2)
+//                 return -1;
+//             if (num1 > num2)
+//                 return 1;
+            
+//             // now after token we have character so skip it.
+//             i++;
+//             j++;
+//         }
+
+//         return 0;
+//     }
+// };
+
