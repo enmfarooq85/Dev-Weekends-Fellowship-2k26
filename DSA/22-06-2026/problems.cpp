@@ -431,3 +431,143 @@
 //     }
 // };
 
+// https://leetcode.com/problems/reverse-prefix-of-word/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     string reversePrefix(string word, char ch) {
+//         if(word.length() == 1) return word;
+
+//         int end = -1;
+//         for (int i = 0; i < word.length(); i++) {
+//             if (word[i] == ch) {
+//                 end = i;
+//                 break;
+//             }
+//         }
+
+//         if (end == -1) {
+//             return word;
+//         } else if (end == 0) {
+//             return word;
+//         }
+
+//         int start = 0;
+//         while (start < end) {
+//             swap(word[start], word[end]);
+//             start++;
+//             end--;
+//         }
+
+//         return word;
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     string reversePrefix(string word, char ch) {
+//         stack<char> st;
+//         int index = -1;
+
+//         for (int i = 0; i < word.size(); i++) {
+//             st.push(word[i]);
+
+//             if (word[i] == ch) {
+//                 index = i;
+//                 break;
+//             }
+//         }
+
+//         if (index == -1)
+//             return word;
+
+//         int i = 0;
+//         while (!st.empty()) {
+//             word[i++] = st.top();
+//             st.pop();
+//         }
+
+//         return word;
+//     }
+// };
+
+
+// https://leetcode.com/problems/partition-array-according-to-given-pivot/
+
+// T.C => O(n)
+// S.C => O(s + m + e)
+
+// class Solution {
+// public:
+//     vector<int> pivotArray(vector<int>& nums, int pivot) {
+//         int n = nums.size();
+//         vector<int> small;
+//         vector<int> large;
+//         vector<int> equal;
+
+//         for (int i = 0; i < n; i++) {
+//             if (nums[i] < pivot) {
+//                 small.push_back(nums[i]);
+//             } else if (nums[i] > pivot) {
+//                 large.push_back(nums[i]);
+//             } else {
+//                 equal.push_back(nums[i]);
+//             }
+//         }
+
+//         vector<int> ans;
+
+//         for (int i = 0; i < small.size(); i++) {
+//             ans.push_back(small[i]);
+//         }
+
+//         for (int i = 0; i < equal.size(); i++) {
+//             ans.push_back(equal[i]);
+//         }
+
+//         for (int i = 0; i < large.size(); i++) {
+//             ans.push_back(large[i]);
+//         }
+
+//         return ans;
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     vector<int> pivotArray(vector<int>& nums, int pivot) {
+//         int n = nums.size();
+//         vector<int> ans(n);
+
+//         int j = 0;
+
+//         for (int i = 0; i < n; i++) {
+//             if (nums[i] < pivot) {
+//                 ans[j++] = nums[i];
+//             }
+//         }
+
+//         for (int i = 0; i < n; i++) {
+//             if (nums[i] == pivot) {
+//                 ans[j++] = nums[i];
+//             }
+//         }
+
+//         for (int i = 0; i < n; i++) {
+//             if (nums[i] > pivot) {
+//                 ans[j++] = nums[i];
+//             }
+//         }
+
+//         return ans;
+//     }
+// };
