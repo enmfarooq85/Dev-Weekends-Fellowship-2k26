@@ -106,3 +106,194 @@
 //         return false;
 //     }
 // };
+
+// https://leetcode.com/problems/find-all-anagrams-in-a-string
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     bool isAllZero(vector<int>& charIndices) {
+//         for (auto& i : charIndices) {
+//             if (i != 0) {
+//                 return false;
+//             }
+//         }
+//         return true;
+//     };
+
+//     vector<int> findAnagrams(string s, string p) {
+//         int n = s.length();
+//         int k = p.length();
+//         if (n < k)
+//             return {};
+
+//         vector<int> charIndices(26, 0);
+//         vector<int> ans;
+
+//         for (char i : p) {
+//             // picking character
+//             // finding correct position of the char means a will point to zero
+//             // and z will point to 26
+//             charIndices[i - 'a']++;
+//         }
+
+//         int i = 0, j = 0;
+//         while (j < n) {
+//             // decreasing freq
+//             charIndices[s[j] - 'a']--;
+//             // if reached to window size then chk if find anagrams then push the
+//             // starting index and shift the window
+//             if (j - i + 1 == k) {
+//                 if (isAllZero(charIndices)) {
+//                     ans.push_back(i);
+//                 }
+//                 // increase the freq of extracted char
+//                 charIndices[s[i] - 'a']++;
+//                 // shift window
+//                 i++;
+//             };
+
+//             // j will always move if window size reached or not
+//             j++;
+//         }
+
+//         return ans;
+//     };
+// };
+
+// https://leetcode.com/problems/minimum-size-subarray-sum/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     int minSubArrayLen(int target, vector<int>& nums) {
+//         int n = nums.size();
+//         int i = 0, j = 0;
+//         int currSum = 0;
+//         int minL = INT_MAX;
+
+//         while (j < n) {
+//             currSum += nums[j];
+//             while (currSum >= target) {
+//                 minL = min(minL, j - i + 1);
+//                 currSum -= nums[i];
+//                 i++;
+//             }
+
+//             j++;
+//         }
+//         cout << currSum << target << endl;
+
+//         return minL == INT_MAX ? 0 : minL;
+//     }
+// };
+
+// https://www.geeksforgeeks.org/problems/count-occurences-of-anagrams5839/1
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     bool isAllZero(vector<int>& charIndices) {
+//         for (auto& i : charIndices) {
+//             if (i != 0) {
+//                 return false;
+//             }
+//         }
+//         return true;
+//     };
+
+//    int search(string &pat, string &txt) {
+//         int n = txt.length();
+//         int k = pat.length();
+//         if (n < k)
+//             return {};
+
+//         vector<int> charIndices(26, 0);
+//         int ans;
+
+//         for (char i : pat) {
+//             // picking character
+//             // finding correct position of the char means a will point to zero
+//             // and z will point to 26
+//             charIndices[i - 'a']++;
+//         }
+
+//         int i = 0, j = 0;
+//         while (j < n) {
+//             // decreasing freq
+//             charIndices[txt[j] - 'a']--;
+//             // if reached to window size then chk if find anagrams then push the
+//             // starting index and shift the window
+//             if (j - i + 1 == k) {
+//                 if (isAllZero(charIndices)) {
+//                    ans++;
+//                 }
+//                 // increase the freq of extracted char
+//                 charIndices[txt[i] - 'a']++;
+//                 // shift window
+//                 i++;
+//             };
+
+//             // j will always move if window size reached or not
+//             j++;
+//         }
+
+//         return ans;
+//     };
+// };
+
+// https://www.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1
+
+// T.C => O(n * k)
+// S.C => O(n)
+
+// class Solution {
+// 	public:
+// 	vector<int> copyRange(const vector<int>& arr, int start, int end) {
+// 		return vector<int>(arr.begin() + start, arr.begin() + end + 1);
+// 	}
+	
+// 	int findFirstNegativeInt(const vector<int>& nums) {
+// 		for (int x : nums) {
+// 			if (x < 0)
+// 				return x;
+// 		}
+// 		return 0;
+// 	}
+	
+// 	vector<int> firstNegInt(vector<int>& arr, int k) {
+// 		// code here
+// 		int n = arr.size();
+// 		if (n < k) {
+// 			return {};
+// 		}
+		
+// 		int i = 0, j = 0;
+// 		vector<int> ans;
+		
+// 		while (j < n) {
+// 			if (j - i + 1 == k) {
+// 				// means negative
+// 				vector<int> window = copyRange(arr, i, j);
+// 				int firstNegative = findFirstNegativeInt(window);
+				
+// 				if (firstNegative < 0) {
+// 					ans.push_back(firstNegative);
+// 				} else {
+// 					ans.push_back(0);
+// 				}
+// 				i++;
+// 			};
+// 			j++;
+// 		};
+		
+// 		return ans;
+		
+// 	}
+// };
