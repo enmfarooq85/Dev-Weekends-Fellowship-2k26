@@ -297,3 +297,158 @@
 		
 // 	}
 // };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// 	public:
+// 	// to avoid writing again and again long long
+// 	typedef long long ll;
+// 	vector<int> firstNegInt(vector<int>& arr, int k) {
+// 		int i = 0, j = 0;
+// 		int n = arr.size();
+		
+// 		queue<ll> negativeIntQueue;
+// 		vector<int> ans;
+		
+// 		while (j < n) {
+// 			if (arr[j] < 0) {
+// 				negativeIntQueue.push(arr[j]);
+// 			};
+			
+// 			if (j - i + 1 == k) {
+// 				if (!negativeIntQueue.empty()) {
+// 					ans.push_back(negativeIntQueue.front());
+// 				} else {
+// 					ans.push_back(0);
+// 				};
+				
+// 				if (!negativeIntQueue.empty() && arr[i] < 0) {
+// 					negativeIntQueue.pop();
+// 				};
+				
+// 				i++;
+// 			};
+			
+// 			j++;
+// 		};
+		
+// 		return ans;
+// 	};
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// Note: TC and SC is same, but dequeue is mostly used in the sliding window problems as well as we store indices in the deque. That is the main reason behing more good code rather than prev approach. 
+
+// class Solution {
+// public:
+//     vector<int> firstNegInt(vector<int>& arr, int k) {
+//         // stores indices of negative elements
+//         deque<int> deq;
+//         // store find result
+//         vector<int> result;
+
+//         int n = arr.size();
+
+//         // process the first window of size k
+//         // store indices of all negative numbers in the deque
+//         for (int i = 0; i < k; i++) {
+//             if (arr[i] < 0) {
+//                 deq.push_back(i);
+//             }
+//         }
+
+//         // process the remaining windows
+//         for (int i = k; i < n; i++) {
+
+//             // font of the deque always contains the index
+//             // of the first negative number in the current window.
+//             if (!deq.empty()) {
+//                 result.push_back(arr[deq.front()]);
+//             } else {
+//                 result.push_back(0);
+//             }
+
+//             // remove indices that are no longer part of the current window.
+//             while (!deq.empty() && deq.front() < i - k + 1) {
+//                 deq.pop_front();
+//             }
+
+//             // add the current element's index if it is negative.
+//             if (arr[i] < 0) {
+//                 deq.push_back(i);
+//             }
+//         }
+
+//         // process the last window
+//         if (!deq.empty()) {
+//             result.push_back(arr[deq.front()]);
+//         } else {
+//             result.push_back(0);
+//         }
+
+//         return result;
+//     }
+// };
+
+// https://leetcode.com/problems/minimum-window-substring/description/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     string minWindow(string s, string t) {
+//         int n = s.length();
+//         map<char, int> mp;
+
+//         for (char& ch : t) {
+//             mp[ch]++;
+//         }
+
+//         int requiredStringCount = t.length();
+//         int i = 0, j = 0;
+//         int startIndex = 0;
+//         int minWindowSize = INT_MAX;
+
+//         while (j < n) {
+//             // if s[j] in map has value greater than zero it means we required it so do -1 to requiredSubstringCount
+//             if (mp[s[j]] > 0){
+//                 requiredStringCount--;
+//             }
+            
+//             // always reduce the s[j] count either present in map or not
+//             // it help us to shrink the size as much as possible
+//             mp[s[j]]--;
+
+//             // try to shrink the window untill our requiredSubstringCount remains zero so that we get min size substring
+//             while (requiredStringCount == 0) {
+//                 int currWindowSize = j - i + 1;
+//                 if (minWindowSize > currWindowSize) {
+//                     minWindowSize = currWindowSize;
+//                     startIndex = i;
+//                 }
+                
+//                 // incrementing plus one to every i element that we will removed from window
+//                 mp[s[i]]++;
+
+//                 // if i element that we are going to extract it is one char of t then we need to check this in the upcoming window
+//                 if (mp[s[i]] > 0){
+//                     requiredStringCount++;
+//                 }
+                
+//                 // shrink
+//                 i++;
+//             }
+
+//             // always move on
+//             j++;
+//         }
+
+//         // minWindow remains INT_MAX then return empty string otherwise minWindow substring
+//         return minWindowSize == INT_MAX ? "" : s.substr(startIndex, minWindowSize);
+//     }
+// };
