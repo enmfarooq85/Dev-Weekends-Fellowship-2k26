@@ -452,3 +452,77 @@
 //         return minWindowSize == INT_MAX ? "" : s.substr(startIndex, minWindowSize);
 //     }
 // };
+  
+// https://leetcode.com/problems/contains-duplicate-ii/description/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     bool containsNearbyDuplicate(vector<int>& nums, int k) {
+//         int n = nums.size();
+//         unordered_set<int> st;
+//         int i = 0, j = 0;
+        
+//         while(j < n) {
+//             while(abs(i-j) > k) {
+//                 st.erase(nums[i]);
+//                 i++;
+//             }
+            
+//             if(st.find(nums[j]) != st.end()) {
+//                 return true;
+//             }
+            
+//             st.insert(nums[j]);
+//             j++;
+//         }
+        
+//         return false;
+//     }
+// };
+
+// https://leetcode.com/problems/count-subarrays-with-fixed-bounds/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     long long countSubarrays(vector<int>& nums, int minK, int maxK) {
+//         long long ans = 0;
+
+//         int minKPosition = -1;
+//         int maxKPosition = -1;
+//         int wrongIndex = -1;
+
+//         for (int i = 0; i < nums.size(); i++) {
+            
+//             // If the current element is outside the valid range,
+//             // any subarray including this element becomes invalid.
+//             if (nums[i] < minK || nums[i] > maxK)
+//                 wrongIndex = i;
+
+//             // Update the latest occurrence of minK.
+//             if (nums[i] == minK)
+//                 minKPosition = i;
+
+//             // Update the latest occurrence of maxK.
+//             if (nums[i] == maxK)
+//                 maxKPosition = i;
+
+//             // earliest position that guarantees both minK and maxK
+//             // are included is
+//             // next subarray must start AFTER the latest invalid index.
+//             int count = min(minKPosition, maxKPosition) - wrongIndex;
+
+//             // If count is positive, add it to the answer.
+//             // Otherwise, no valid subarray ends at index i.
+//             ans += (count > 0) ? count : 0;
+//         }
+
+//         return ans;
+//     }
+// };
+
