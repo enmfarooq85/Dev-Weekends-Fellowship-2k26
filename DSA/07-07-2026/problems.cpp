@@ -105,3 +105,95 @@
 //         return dummy->next;
 //     }
 // };
+
+// https://leetcode.com/problems/swapping-nodes-in-a-linked-list/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     int calcLength(ListNode* linkedList) {
+//         int count = 0;
+//         while (linkedList != NULL) {
+//             linkedList = linkedList->next;
+//             count++;
+//         }
+//         return count;
+//     }
+
+//     ListNode* swapNodes(ListNode* head, int k) {
+//         if (head == NULL || head->next == NULL) {
+//             return head;
+//         }
+
+//         int l = calcLength(head);
+
+//         int leftKPosition = k;
+//         int rightKPosition = l - k + 1;
+
+//         ListNode* node1 = NULL;
+//         ListNode* node2 = NULL;
+
+//         ListNode* temp = head;
+
+//         while (temp != NULL) {
+//             if (leftKPosition == 1) {
+//                 node1 = temp;
+//                 break;
+//             }
+
+//             temp = temp->next;
+//             leftKPosition--;
+//         }
+
+//         temp = head;
+
+//         while (temp != NULL) {
+//             if (rightKPosition == 1) {
+//                 node2 = temp;
+//                 break;
+//             }
+
+//             temp = temp->next;
+//             rightKPosition--;
+//         }
+
+//         swap(node1->val, node2->val);
+
+//         return head;
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     ListNode* swapNodes(ListNode* head, int k) {
+//         ListNode* node1 = NULL;
+//         ListNode* node2 = NULL;
+
+//         ListNode* temp = head;
+//         int count = 1;
+
+//         while (temp != NULL){
+//             if (node2 != NULL){
+//                 node2 = node2->next;
+//             }
+
+//             if (count == k){
+//                 node1 = temp;
+//                 node2 = head;
+//             }
+    
+//             count++;
+//             temp = temp->next;
+//         }
+
+//         swap(node1->val, node2->val);
+
+//         return head;
+//     }
+// };
+
