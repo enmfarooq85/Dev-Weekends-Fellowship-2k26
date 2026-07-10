@@ -186,7 +186,7 @@
 //                 node1 = temp;
 //                 node2 = head;
 //             }
-    
+
 //             count++;
 //             temp = temp->next;
 //         }
@@ -197,3 +197,42 @@
 //     }
 // };
 
+// https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     int pairSum(ListNode* head) {
+//         ListNode* slow = head;
+//         ListNode* fast = head;
+
+//         while (fast != NULL && fast->next != NULL) {
+//             slow = slow->next;
+//             fast = fast->next->next;
+//         };
+
+//         ListNode* mid = slow;
+
+//         ListNode* prev = NULL;
+//         ListNode* nextNode = NULL;
+
+//         while (mid != NULL) {
+//             nextNode = mid->next;
+//             mid->next = prev;
+//             prev = mid;
+//             mid = nextNode;
+//         }
+
+//         ListNode* curr = head;
+//         int maxSum = INT_MIN;
+//         while (prev != NULL){
+//             maxSum = max(maxSum, prev->val + curr->val);
+//             prev = prev->next;
+//             curr = curr->next;
+//         }
+
+//         return maxSum;
+//     }
+// };
