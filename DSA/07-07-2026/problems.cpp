@@ -236,3 +236,112 @@
 //         return maxSum;
 //     }
 // };
+
+// https://leetcode.com/problems/add-two-numbers/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+//         ListNode* dummyNode = new ListNode(-1);
+//         ListNode* curr = dummyNode;
+
+//         int carry = 0;
+
+//         while (l1 || l2 || carry) {
+//             int sum = carry;
+
+//             if (l1) {
+//                 sum += l1->val;
+//                 l1 = l1->next;
+//             }
+
+//             if (l2) {
+//                 sum += l2->val;
+//                 l2 = l2->next;
+//             }
+
+//             carry = sum / 10;
+//             sum = sum % 10;
+
+//             curr->next = new ListNode(sum);
+//             curr = curr->next;
+//         };
+
+//         return dummyNode->next;
+//     }
+// };
+
+// https://leetcode.com/problems/add-two-numbers-ii/description/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+//         stack<int> l1Stack;
+//         stack<int> l2Stack;
+//         while (l1) {
+//             l1Stack.push(l1->val);
+//             l1 = l1->next;
+//         }
+
+//         while (l2) {
+//             l2Stack.push(l2->val);
+//             l2 = l2->next;
+//         }
+
+//         ListNode* dummyNode = new ListNode(-1);
+//         ListNode* curr = dummyNode;
+
+//         int carry = 0;
+//         while (!l1Stack.empty() || !l2Stack.empty() || carry) {
+//             int sum = carry;
+
+//             if (!l1Stack.empty()) {
+//                 sum += l1Stack.top();
+//                 l1Stack.pop();
+//             }
+
+//             if (!l2Stack.empty()) {
+//                 sum += l2Stack.top();
+//                 l2Stack.pop();
+//             }
+
+//             carry = sum / 10;
+//             sum = sum % 10;
+
+//             ListNode* node = new ListNode(sum);
+//             node->next = dummyNode->next;
+//             dummyNode->next = node;
+//         };
+
+//         return dummyNode->next;
+//     }
+// };
+
+// https://leetcode.com/problems/reverse-linked-list/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     ListNode* reverseList(ListNode* head) {
+//         ListNode* next = NULL;
+//         ListNode* curr = head;
+//         ListNode* prev = NULL;
+
+//         while (curr != NULL){
+//             next = curr->next;
+//             curr->next = prev;
+//             prev = curr;
+//             curr = next;
+//         }
+
+//         return prev;
+//     }
+// };
