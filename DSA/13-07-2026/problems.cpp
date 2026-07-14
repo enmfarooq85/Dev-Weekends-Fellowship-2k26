@@ -56,3 +56,33 @@
 //         };
 //     }
 // };
+
+// https://leetcode.com/problems/construct-string-from-binary-tree/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     string tree2str(TreeNode* root) {
+//         if (root == NULL) {
+//             return "";
+//         }
+
+//         string result = to_string(root->val);
+//         string left = tree2str(root->left);
+//         string right = tree2str(root->right);
+
+//         if (root->left == NULL && root->right == NULL) {
+//             return result;
+//         } else if (root->left == NULL) {
+//             return result + "()" + "(" + right + ")";
+//         } else if (root->right == NULL) {
+//             return result + "(" + left + ")";
+//         } else if (root->left != NULL && root->right != NULL) {
+//             return result + "(" + left + ")" + "(" + right + ")";
+//         }
+
+//         return result;
+//     }
+// };
