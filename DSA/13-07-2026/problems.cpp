@@ -86,3 +86,85 @@
 //         return result;
 //     }
 // };
+
+// https://leetcode.com/problems/find-the-winner-of-the-circular-game/
+
+// T.C => O(n * n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int findTheWinner(int n, int k) {
+//         if (n == 1) {
+//             return n;
+//         };
+
+//         vector<int> ans;
+
+//         for (int i = 1; i <= n; i++) {
+//             ans.push_back(i);
+//         };
+
+//         int startingPoint = 0;
+//         while (ans.size() > 1){
+//             int removedElementIndex = ((startingPoint + k) - 1) % ans.size();
+//             ans.erase(ans.begin() + removedElementIndex);
+//             startingPoint = removedElementIndex;
+//         }
+
+//         return ans[0];
+//     }
+// };
+
+// T.C => O(n * k)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int findTheWinner(int n, int k) {
+//         queue<int> qu;
+//         for (int i = 1; i <= n; i++)
+//         {
+//             qu.push(i);
+//         }
+
+//         while (qu.size() > 1){
+//             for (int count = 1; count <= k -1; count++){
+//                 qu.push(qu.front());
+//                 qu.pop();
+//             }
+
+//             qu.pop();
+//         }
+//         return qu.front();
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int findWinnerFriendIndex(int n, int k) {
+//         // if only one left then i have to return 0 index
+//         // then we will add k + 1 to return the original array index element
+//         if (n == 1) {
+//             return 0;
+//         }
+
+//         // removed one friend
+//         int idx = findWinnerFriendIndex(n - 1, k);
+//         // now, add k in the idx to find original index because we removed kth element
+//         // also make sure that it doesn't overflow
+//         idx = (idx + k) % n;
+
+//         return idx;
+//     }
+
+//     int findTheWinner(int n, int k) {
+//         int winnerIndex = findWinnerFriendIndex(n, k);
+//         // we found the original position in the array
+//         // now add + 1 to index and return the friend identifier
+//         return winnerIndex + 1;
+//     }
+// };
