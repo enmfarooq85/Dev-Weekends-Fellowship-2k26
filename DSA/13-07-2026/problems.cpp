@@ -289,3 +289,85 @@
 //         return solve(num);
 //     };
 // };
+
+// https://leetcode.com/problems/different-ways-to-add-parentheses/
+
+// T.C => O(4^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     vector<int> solve(string s) {
+//         vector<int> ans;
+
+//         for (int i = 0; i < s.length(); i++) {
+//             if (s[i] == '+' || s[i] == '-' || s[i] == '*') {
+//                 vector<int> leftOperand = solve(s.substr(0, i));
+//                 vector<int> rightOperand = solve(s.substr(i + 1));
+
+//                 for (int& x : leftOperand) {
+//                     for (int& y : rightOperand) {
+//                         if (s[i] == '+') {
+//                             ans.push_back(x + y);
+//                         } else if (s[i] == '-') {
+//                             ans.push_back(x - y);
+//                         } else if (s[i] == '*'){
+//                             ans.push_back(x * y);
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+
+//         // if we don't find any operator just push that number
+//         // right = "1" => {1};
+//         if (ans.empty()) {
+//             ans.push_back(stoi(s));
+//         }
+
+//         return ans;
+//     }
+
+//     vector<int> diffWaysToCompute(string s) { return solve(s); }
+// };
+
+// https://leetcode.com/problems/lexicographical-numbers/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     void dfs(int currNum, int endNum, vector<int>& ans) {
+//         // if not in range then discard it
+//         if (currNum > endNum) {
+//             return;
+//         }
+
+//         // otherwise push it
+//         ans.push_back(currNum);
+
+//         // trying to create more number from the currNum that are valid
+//         for (int i = 0; i <= 9; i++) {
+//             // creating new number using Math
+//             int appendedNum = (currNum * 10) + i;
+//             // if not in range then discard it
+//             if (appendedNum > endNum) {
+//                 return;
+//             }
+
+//             // trying to create more more numbers from the currNum that are valid
+//             dfs(appendedNum, endNum, ans);
+//         }
+//     }
+
+//     vector<int> lexicalOrder(int n) {
+//         vector<int> ans;
+//         // starting from 1 to 9, because we need lexicographical order as well as to avoid duplicates
+//         for (int i = 1; i <= 9; i++) {
+//             dfs(i, n, ans);
+//         }
+
+//         return ans;
+//     }
+// };
