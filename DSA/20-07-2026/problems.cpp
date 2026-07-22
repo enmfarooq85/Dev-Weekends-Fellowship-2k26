@@ -122,3 +122,82 @@
 //         return solve(nums);
 //     }
 // };
+
+// https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/
+
+// T.C => O(n * 2^n)
+// S.C => O(n * 2^n)
+
+// class Solution {
+// public:
+//     void solve(int n, string temp, vector<string>& result) {
+//         if (temp.length() == n) {
+//             result.push_back(temp);
+//             return;
+//         }
+
+//         for (char ch = 'a'; ch <= 'c'; ch++) {
+//             if (!temp.empty() && temp.back() == ch) {
+//                 continue;
+//             };
+
+//             temp.push_back(ch);
+//             solve(n, temp, result);
+//             temp.pop_back();
+//         }
+//     }
+
+//     string getHappyString(int n, int k) {
+//         vector<string> result;
+//         string temp = "";
+
+//         solve(n, temp, result);
+
+//         if (result.size() < k) {
+//             return "";
+//         }
+
+//         return result[k - 1];
+//     }
+// };
+
+// T.C => O(n * 2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     void solve(int& n, int& k, int& count, string curr, string &ans) {
+//         if (curr.length() == n) {
+//             count++;
+//             if (count == k) {
+//                 ans = curr;
+//             };
+
+//             return;
+//         }
+
+//         for (char ch = 'a'; ch <= 'c'; ch++) {
+//             if (!curr.empty() && curr.back() == ch) {
+//                 continue;
+//             };
+
+//             curr.push_back(ch);
+            
+//             solve(n, k, count, curr, ans);
+
+//             if (!ans.empty()) return;
+            
+//             curr.pop_back();
+//         }
+//     }
+
+//     string getHappyString(int n, int k) {
+//         int count = 0;
+//         string ans = "";
+//         string curr = "";
+
+//         solve(n, k, count, curr, ans);
+
+//         return ans;
+//     }
+// };
