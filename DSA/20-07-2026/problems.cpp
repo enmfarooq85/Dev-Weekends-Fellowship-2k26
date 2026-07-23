@@ -201,3 +201,75 @@
 //         return ans;
 //     }
 // };
+
+// https://leetcode.com/problems/letter-tile-possibilities/description/
+
+// T.C => O(n * n!)
+// S.C => O(n * n!) + O(n)
+
+// class Solution {
+// public:
+//     void solve(int n, string& tiles, vector<bool>& used,
+//                unordered_set<string>& result, string& curr) {
+//         result.insert(curr);
+
+//         for (int i = 0; i < n; i++) {
+//             if (used[i])
+//                 continue;
+
+//             curr.push_back(tiles[i]);
+//             used[i] = true;
+
+//             solve(n, tiles, used, result, curr);
+
+//             used[i] = false;
+//             curr.pop_back();
+//         }
+//     }
+
+//     int numTilePossibilities(string tiles) {
+//         int n = tiles.length();
+//         vector<bool> used(n, false);
+//         unordered_set<string> result;
+//         string curr = "";
+
+//         solve(n, tiles, used, result, curr);
+
+//         return result.size() - 1;
+//     }
+// };
+
+// T.C => O(n!)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int total;
+
+//     void findSequences(vector<int>& count) {
+//         total++;
+
+//         for (int charPosition = 0; charPosition < 26; charPosition++) {
+//             if (count[charPosition] == 0) {
+//                 continue;
+//             }
+
+//             count[charPosition]--;
+//             findSequences(count);
+//             count[charPosition]++;
+//         }
+//     }
+
+//     int numTilePossibilities(string tiles) {
+//         total = 0;
+
+//         vector<int> count(26, 0);
+
+//         for (char c : tiles) {
+//             count[c - 'A']++;
+//         }
+
+//         findSequences(count);
+//         return total - 1;
+//     }
+// };
