@@ -273,3 +273,52 @@
 //         return total - 1;
 //     }
 // };
+
+// https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/
+
+// T.C => O(n* 2^)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     void solve(int i, int currCount, int& maxCount, string s,
+//                unordered_set<string> sett) {
+//         // Pruning:
+//         // Even if we split every remaining character individually,
+//         // we still cannot beat the current maximum count.
+//         if (currCount + (s.length() - i) <= maxCount) {
+//             return;
+//         }
+
+//         // Reached the end of the string.
+//         // Update the maximum number of unique substrings found.
+//         if (i >= s.length()) {
+//             maxCount = max(currCount, maxCount);
+//             return;
+//         }
+
+//         // Try every possible substring starting from index i.
+//         for (int j = i; j < s.length(); j++) {
+//             string splittedString = s.substr(i, j - i + 1);
+//             cout << splittedString << endl;
+//             // If the substring is unique
+//             // choose it, explore recursively, then backtrack.
+//             if (sett.find(splittedString) == sett.end()) {
+//                 sett.insert(splittedString);
+//                 solve(j + 1, currCount + 1, maxCount, s, sett);
+//                 sett.erase(splittedString);
+//             }
+//         }
+//     }
+
+//     int maxUniqueSplit(string s) {
+//         int currCount = 0;
+//         int maxCount = 0;
+//         int i = 0;
+//         unordered_set<string> sett;
+
+//         solve(i, currCount, maxCount, s, sett);
+
+//         return maxCount;
+//     }
+// };
