@@ -322,3 +322,118 @@
 //         return maxCount;
 //     }
 // };
+
+// https://leetcode.com/problems/maximum-score-words-formed-by-letters/description/
+
+// T.C => O(n* 2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int maxScore;
+//     int n;
+
+//     void solve(int i, int n, int currScore, vector<int>& score,
+//                vector<string>& words, vector<int>& lettersMp) {
+//         maxScore = max(currScore, maxScore);
+
+//         if (i >= n) {
+//             return;
+//         }
+
+//         int j = 0;
+//         int tempScore = 0;
+//         vector<int> tempLettersMp = lettersMp;
+//         while (j < words[i].length()) {
+//             tempLettersMp[words[i][j] - 'a']--;
+//             tempScore += score[words[i][j] - 'a'];
+
+//             if (tempLettersMp[words[i][j] - 'a'] < 0) {
+//                 break;
+//             }
+
+//             j++;
+//         }
+
+//         if (j == words[i].length()) {
+//             solve(i + 1, n, currScore + tempScore, score, words, tempLettersMp);
+//         };
+
+//         solve(i + 1, n, currScore, score, words, lettersMp);
+//     };
+
+//     int maxScoreWords(vector<string>& words, vector<char>& letters,
+//                       vector<int>& score) {
+//         vector<int> lettersMp(26, 0);
+
+//         for (auto& ch : letters) {
+//             lettersMp[ch - 'a']++;
+//         };
+        
+//         n = words.size();
+//         maxScore = INT_MIN;
+//         int currScore = 0;
+//         int i = 0;
+
+//         solve(i, n, currScore, score, words, lettersMp);
+
+//         return maxScore;
+//     }
+// };
+
+// T.C => O(n* 2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int maxScore;
+//     int n;
+
+//     void solve(int i, int n, int currScore, vector<int>& score,
+//                vector<string>& words, vector<int>& lettersMp) {
+//         maxScore = max(currScore, maxScore);
+
+//         if (i >= n) {
+//             return;
+//         }
+
+//         bool canTake = true;
+//         int tempScore = 0;
+//         for (char ch : words[i]) {
+//             lettersMp[ch - 'a']--;
+//             tempScore += score[ch - 'a'];
+
+//             if (lettersMp[ch - 'a'] < 0) {
+//                 canTake = false;
+//             }
+//         }
+
+//         if (canTake) {
+//             solve(i + 1, n, currScore + tempScore, score, words, lettersMp);
+//         };
+
+//         for (char ch : words[i]) {
+//             lettersMp[ch - 'a']++;
+//         }
+
+//         solve(i + 1, n, currScore, score, words, lettersMp);
+//     };
+
+//     int maxScoreWords(vector<string>& words, vector<char>& letters,
+//                       vector<int>& score) {
+//         vector<int> lettersMp(26, 0);
+
+//         for (auto& ch : letters) {
+//             lettersMp[ch - 'a']++;
+//         };
+
+//         n = words.size();
+//         maxScore = INT_MIN;
+//         int currScore = 0;
+//         int i = 0;
+
+//         solve(i, n, currScore, score, words, lettersMp);
+
+//         return maxScore;
+//     }
+// };
