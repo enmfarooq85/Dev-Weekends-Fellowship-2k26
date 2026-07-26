@@ -437,3 +437,82 @@
 //         return maxScore;
 //     }
 // };
+
+// https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+
+// T.C => O(n* 2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     void solve(int idx, string digits, unordered_map<char, string>& mp,
+//                string& temp, vector<string>& ans) {
+//         if (idx == digits.length()) {
+//             ans.push_back(temp);
+//             return;
+//         }
+
+//         char chDigit = digits[idx];
+//         string chToLetterMp = mp[chDigit];
+
+//         for (int i = 0; i < chToLetterMp.length(); i++) {
+//             temp.push_back(chToLetterMp[i]);
+//             solve(idx + 1, digits, mp, temp, ans);
+//             temp.pop_back();
+//         }
+//     };
+
+//     vector<string> letterCombinations(string digits) {
+//         unordered_map<char, string> mp;
+
+//         mp['2'] = "abc";
+//         mp['3'] = "def";
+//         mp['4'] = "ghi";
+//         mp['5'] = "jkl";
+//         mp['6'] = "mno";
+//         mp['7'] = "pqrs";
+//         mp['8'] = "tuv";
+//         mp['9'] = "wxyz";
+
+//         vector<string> ans;
+//         string temp = "";
+//         int idx = 0;
+
+//         solve(idx, digits, mp, temp, ans);
+
+//         return ans;
+//     }
+// };
+
+// https://leetcode.com/problems/the-number-of-beautiful-subsets/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int solve(vector<int>& nums, int idx, unordered_map<int, int>& mp, int k,
+//               int& count) {
+//         if (idx == nums.size()) {
+//             count++;
+//             return count;
+//         }
+
+//         if (!mp[nums[idx] - k] && !mp[nums[idx] + k]) {
+//             mp[nums[idx]]++;
+//             solve(nums, idx + 1, mp, k, count);
+//             mp[nums[idx]]--;
+//         };
+
+//         solve(nums, idx + 1, mp, k, count);
+
+//         return count;
+//     };
+
+//     int beautifulSubsets(vector<int>& nums, int k) {
+//         unordered_map<int, int> mp;
+//         int count = 0;
+
+//         return solve(nums, 0, mp, k, count) - 1;
+//     }
+// };
