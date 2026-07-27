@@ -516,3 +516,93 @@
 //         return solve(nums, 0, mp, k, count) - 1;
 //     }
 // };
+
+// https://leetcode.com/problems/word-search/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     bool backtrack(int i, int j, int k, int rows, int cols, string word,
+//                    vector<vector<char>>& board) {
+//         if (k == word.length())
+//             return true;
+
+//         if (i < 0 || i >= rows || j < 0 || j >= cols ||
+//             board[i][j] != word[k]) {
+//             return false;
+//         }
+
+//         // it means valid
+//         char temp = board[i][j];
+//         // mark as visited
+//         board[i][j] = '#';
+
+//         // bottom // top // right // left
+//         bool bottom = backtrack(i + 1, j, k + 1, rows, cols, word, board);
+//         bool top = backtrack(i - 1, j, k + 1, rows, cols, word, board);
+//         bool right = backtrack(i, j + 1, k + 1, rows, cols, word, board);
+//         bool left = backtrack(i, j - 1, k + 1, rows, cols, word, board);
+
+//         board[i][j] = temp;
+//         return bottom || top || right || left;
+//     }
+//     bool exist(vector<vector<char>>& board, string word) {
+//         int rows = board.size();
+//         int cols = board[0].size();
+
+//         for (int i = 0; i < rows; i++) {
+//             for (int j = 0; j < cols; j++) {
+//                 if (backtrack(i, j, 0, rows, cols, word, board))
+//                     return true;
+//             }
+//         }
+
+//         return false;
+//     }
+// };
+
+// Note: There is a slight difference in this approach from previous. Now, we are calling the backtrack function when we are finding the first letter of word in board. Other part of code is same as above.
+
+// class Solution {
+// public:
+//     bool backtrack(int i, int j, int k, int rows, int cols, string word,
+//                    vector<vector<char>>& board) {
+//         if (k == word.length())
+//             return true;
+
+//         if (i < 0 || i >= rows || j < 0 || j >= cols ||
+//             board[i][j] != word[k]) {
+//             return false;
+//         }
+
+//         // it means valid
+//         char temp = board[i][j];
+//         // mark as visited
+//         board[i][j] = '#';
+
+//         // bottom // top // right // left
+//         bool bottom = backtrack(i + 1, j, k + 1, rows, cols, word, board);
+//         bool top = backtrack(i - 1, j, k + 1, rows, cols, word, board);
+//         bool right = backtrack(i, j + 1, k + 1, rows, cols, word, board);
+//         bool left = backtrack(i, j - 1, k + 1, rows, cols, word, board);
+
+//         board[i][j] = temp;
+//         return bottom || top || right || left;
+//     }
+//     bool exist(vector<vector<char>>& board, string word) {
+//         int rows = board.size();
+//         int cols = board[0].size();
+
+//         for (int i = 0; i < rows; i++) {
+//             for (int j = 0; j < cols; j++) {
+//                 if (board[i][j] == word[0] &&
+//                     backtrack(i, j, 0, rows, cols, word, board))
+//                     return true;
+//             }
+//         }
+
+//         return false;
+//     }
+// };
