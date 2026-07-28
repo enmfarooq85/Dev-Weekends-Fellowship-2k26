@@ -606,3 +606,47 @@
 //         return false;
 //     }
 // };
+
+// https://leetcode.com/problems/non-decreasing-subsequences/
+
+// T.C => O(n * 2^n)
+// S.C => O(n) 
+
+// class Solution {
+// public:
+//     void backtrack(int n, int idx, vector<int>& nums, vector<int>& curr,
+//                    vector<vector<int>>& result) {
+//         // subset min length should be 2 and maximum nums length
+//         if (curr.size() > 1 && curr.size() <= nums.size())
+//             result.push_back(curr);
+
+//         // using set to avoid duplicates in the curr recursive call
+//         unordered_set<int> st;
+//         // trying each possibility
+//         for (int i = idx; i < n; i++) {
+//             // if vector of int is empty so try to add if not empty then
+//             // chk if we can add or not because curr number
+//             // should be greater than last of vector of integer and move on
+//             if ((curr.empty() || nums[i] >= curr.back()) &&
+//                 st.find(nums[i]) == st.end()) {
+
+//                 curr.push_back(nums[i]);
+//                 backtrack(n, i + 1, nums, curr, result);
+//                 curr.pop_back();
+
+//                 st.insert(nums[i]);
+//             }
+//         }
+//     }
+
+//     vector<vector<int>> findSubsequences(vector<int>& nums) {
+//         int n = nums.size();
+//         // result to store final result of vector of vector of int
+//         vector<vector<int>> result;
+//         // temp vector of int to store a single subsequence
+//         vector<int> curr;
+
+//         backtrack(n, 0, nums, curr, result);
+//         return result;
+//     }
+// };
