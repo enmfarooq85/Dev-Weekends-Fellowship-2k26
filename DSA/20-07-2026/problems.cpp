@@ -650,3 +650,49 @@
 //         return result;
 //     }
 // };
+
+// https://leetcode.com/problems/palindrome-partitioning
+
+// T.C => O(n * 2^n)
+// S.C => O(n * 2^n) 
+
+// class Solution {
+// public:
+//     bool isPalindrome(string& s, int l, int r) {
+//         while (l < r) {
+//             if (s[l] != s[r])
+//                 return false;
+//             l++;
+//             r--;
+//         }
+
+//         return true;
+//     }
+
+//     void backtrack(int idx, int n, string& s, vector<string> curr,
+//                    vector<vector<string>>& result) {
+
+//         if (idx == n) {
+//             result.push_back(curr);
+//             return;
+//         }
+
+//         for (int i = idx; i < n; i++) {
+//             if (isPalindrome(s, idx, i)) {
+//                 curr.push_back(s.substr(idx, i - idx + 1));
+//                 backtrack(i + 1, n, s, curr, result);
+//                 curr.pop_back();
+//             }
+//         }
+//     }
+
+//     vector<vector<string>> partition(string s) {
+//         int n = s.length();
+//         vector<vector<string>> result;
+//         vector<string> curr;
+//         int idx = 0;
+
+//         backtrack(idx, n, s, curr, result);
+//         return result;
+//     }
+// };
