@@ -696,3 +696,67 @@
 //         return result;
 //     }
 // };
+
+// https://leetcode.com/problems/count-numbers-with-unique-digits/description/
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     int countNumbersWithUniqueDigits(int n) {
+//         if (n == 0)
+//             return 1;
+
+//         int ans = 10;
+//         int start = 9;
+//         int curr = 9;
+//         while (n > 1 && start) {
+//             curr *= start;
+//             ans += curr;
+//             start--;
+//             n--;
+//         }
+
+//         return ans;
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     int count = 1;
+
+//     void backtrack(int n, int length, vector<bool>& used) {
+//         if (length == n) {
+//             return;
+//         }
+
+//         for (int digit = 0; digit <= 9; digit++) {
+//             if (length == 0 && digit == 0)
+//                 continue;
+
+//             if (used[digit])
+//                 continue;
+
+//             used[digit] = true;
+//             count++;
+
+//             backtrack(n, length + 1, used);
+//             used[digit] = false;
+//         }
+//     }
+
+//     int countNumbersWithUniqueDigits(int n) {
+
+//         if (n == 0)
+//             return 1;
+
+//         vector<bool> used(10, false);
+//         backtrack(n, 0, used);
+
+//         return count;
+//     }
+// };
