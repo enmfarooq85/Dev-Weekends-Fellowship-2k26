@@ -760,3 +760,62 @@
 //         return count;
 //     }
 // };
+
+// https://leetcode.com/problems/combination-sum-iv/
+
+// T.C => O(n^target)
+// S.C => O(target)
+
+// Note:- This solution will give us TLE.
+
+// class Solution {
+// public:
+//     int solve(int idx, int n, vector<int>& nums, int target) {
+//         if (target == 0) {
+//             return 1;
+//         }
+
+//         if (idx >= n || target < 0) {
+//             return 0;
+//         }
+
+//         return solve(0, n, nums, target - nums[idx]) +
+//                solve(idx + 1, n, nums, target);
+//     };
+    
+//     int combinationSum4(vector<int>& nums, int target) {
+//         int n = nums.size();
+
+//         return solve(0, n, nums, target);
+//     }
+// };
+
+// T.C => O(n * target)
+// S.C => O(target)
+
+// class Solution {
+// public:
+//     int dp[201][1001];
+//     int solve(int idx, int n, vector<int>& nums, int target) {
+//         if (target == 0) {
+//             return 1;
+//         }
+
+//         if (idx >= n || target < 0) {
+//             return 0;
+//         }
+
+//         if (dp[idx][target] != -1){
+//             return dp[idx][target];
+//         }
+
+//         return dp[idx][target] = solve(0, n, nums, target - nums[idx]) +
+//                solve(idx + 1, n, nums, target);
+//     };
+
+//     int combinationSum4(vector<int>& nums, int target) {
+//         int n = nums.size();
+//         memset(dp, -1, sizeof(dp));
+//         return solve(0, n, nums, target);
+//     }
+// };
