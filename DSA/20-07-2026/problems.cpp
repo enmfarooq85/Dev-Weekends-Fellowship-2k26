@@ -819,3 +819,108 @@
 //         return solve(0, n, nums, target);
 //     }
 // };
+
+// https://leetcode.com/problems/permutations/
+
+// T.C => O(n * n!)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     vector<vector<int>> ans;
+//     vector<int> temp;
+//     vector<bool> visited;
+//     int n;
+
+//     void solve(vector<int>& nums) {
+//         if (temp.size() == n) {
+//             ans.push_back(temp);
+//             return;
+//         }
+
+//         for (int i = 0; i < n; i++) {
+//             if (visited[i] == true){
+//                 continue;
+//             };
+
+//             visited[i] = true;
+//             temp.push_back(nums[i]);
+            
+//             solve(nums);
+
+//             temp.pop_back();
+//             visited[i] = false;
+//         }
+//     }
+
+//     vector<vector<int>> permute(vector<int>& nums) {
+//         n = nums.size();
+        
+//         visited.assign(n, false);
+//         solve(nums);
+
+//         return ans;
+//     }
+// };
+
+// https://leetcode.com/problems/beautiful-arrangement
+
+// T.C => O(n * n!)
+// S.C => O(n)
+
+// Note:- This solution is giving TLE.
+
+// class Solution {
+// public:
+//     vector<int> nums;
+//     vector<int> perm;
+//     vector<bool> visited;
+//     int ans = 0;
+//     int nn;
+
+//     void solve(vector<int>& nums) {
+//         if (perm.size() == nn) {
+//             int isAdded = false;
+//             for (int i = 0; i < perm.size(); i++) {
+//                 if (perm[i] % (i + 1) == 0 || (i + 1) % perm[i] == 0) {
+//                     isAdded = true;
+//                 } else {
+//                     isAdded = false;
+//                     break;
+//                 }
+//             };
+
+//             if (isAdded == true) {
+//                 ans += 1;
+//             };
+
+//             return;
+//         }
+
+//         for (int i = 0; i < nn; i++) {
+//             if (visited[i] == true) {
+//                 continue;
+//             };
+
+//             visited[i] = true;
+//             perm.push_back(nums[i]);
+
+//             solve(nums);
+
+//             perm.pop_back();
+//             visited[i] = false;
+//         }
+//     }
+
+//     int countArrangement(int n) {
+//         for (int i = 1; i <= n; i++) {
+//             nums.push_back(i);
+//         };
+
+//         nn = nums.size();
+//         visited.assign(nn, false);
+
+//         solve(nums);
+//         return ans;
+//     }
+// };
