@@ -924,3 +924,53 @@
 //         return ans;
 //     }
 // };
+
+// T.C => O(n!)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     vector<int> nums;
+//     vector<int> perm;
+//     vector<bool> visited;
+//     int ans = 0;
+//     int nn;
+
+//     void solve(vector<int>& nums) {
+//         if (perm.size() == nn) {
+//             ans++;
+//             return;
+//         }
+
+//         int pos = perm.size() + 1;
+//         for (int i = 0; i < nn; i++) {
+//             if (visited[i]) {
+//                 continue;
+//             }
+
+//             if (nums[i] % pos != 0 && pos % nums[i] != 0) {
+//                 continue;
+//             }
+
+//             visited[i] = true;
+//             perm.push_back(nums[i]);
+
+//             solve(nums);
+
+//             perm.pop_back();
+//             visited[i] = false;
+//         }
+//     }
+
+//     int countArrangement(int n) {
+//         for (int i = 1; i <= n; i++) {
+//             nums.push_back(i);
+//         }
+
+//         nn = n;
+//         visited.assign(nn, false);
+
+//         solve(nums);
+//         return ans;
+//     }
+// };
