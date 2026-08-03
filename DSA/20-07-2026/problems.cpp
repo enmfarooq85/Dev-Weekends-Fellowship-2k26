@@ -974,3 +974,56 @@
 //         return ans;
 //     }
 // };
+
+// https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/
+
+// T.C => O(n * 2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     bool isDuplicate(string& s1, string& s2) {
+//         int arr[26] = {0};
+
+//         for (char& ch : s1) {
+//             if (arr[ch - 'a'] > 0)
+//                 return true;
+//             arr[ch - 'a']++;
+//         }
+
+//         for (char& ch : s2) {
+//             if (arr[ch - 'a'] > 0)
+//                 return true;
+//         }
+
+//         return false;
+//     }
+
+//     unordered_map<string, int> mp;
+//     int solve(int idx, vector<string>& arr, string temp, int n) {
+//         if (idx >= n)
+//             return temp.length();
+
+//         if (mp.find(temp) != mp.end())
+//             return mp[temp];
+
+//         int include = 0;
+//         int exclude = 0;
+//         if (isDuplicate(arr[idx], temp)) {
+//             exclude = solve(idx + 1, arr, temp, n);
+//         } else {
+//             exclude = solve(idx + 1, arr, temp, n);
+//             include = solve(idx + 1, arr, temp + arr[idx], n);
+//         }
+
+//         return mp[temp] = max(include, exclude);
+//     }
+
+//     int maxLength(vector<string>& arr) {
+//         string temp = "";
+//         mp.clear();
+//         int n = arr.size();
+
+//         return solve(0, arr, temp, n);
+//     }
+// };
