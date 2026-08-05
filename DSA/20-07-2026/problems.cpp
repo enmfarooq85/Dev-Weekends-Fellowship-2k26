@@ -1058,3 +1058,50 @@
 //         return solve(0, n - 1, s);
 //     }
 // };
+
+// https://leetcode.com/problems/minimum-difficulty-of-a-job-schedule
+
+// T.C => O(n^2 * d)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     int dp[301][11];
+//     int solve(vector<int>& jobDifficulty, int n, int idx, int d) {
+//         if (d == 1) {
+//             int max = jobDifficulty[idx];
+
+//             for (int i = idx + 1; i < jobDifficulty.size(); i++) {
+//                 if (jobDifficulty[i] > max) {
+//                     max = jobDifficulty[i];
+//                 }
+//             }
+
+//             return max;
+//         };
+
+//         if (dp[idx][d] != -1)
+//             return dp[idx][d];
+
+//         int Max = INT_MIN;
+//         int result = INT_MAX;
+
+//         for (int i = idx; i <= n - d; i++) {
+//             Max = max(Max, jobDifficulty[i]);
+//             result = min(result, Max + solve(jobDifficulty, n, i + 1, d - 1));
+//         };
+
+//         return dp[idx][d] = result;
+//     }
+
+//     int minDifficulty(vector<int>& jobDifficulty, int d) {
+//         int n = jobDifficulty.size();
+
+//         if (n < d)
+//             return -1;
+
+//         memset(dp, -1, sizeof(dp));
+
+//         return solve(jobDifficulty, n, 0, d);
+//     }
+// };
