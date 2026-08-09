@@ -217,7 +217,70 @@
 //     }
 // };
 
+// Note:- This is same approach as above, but with more clearity.
+
+// class Solution {
+// public:
+//     int numberOfArithmeticSlices(vector<int>& nums) {
+//         int n = nums.size();
+//         int totalArithmeticSubsequences = 0;
+
+//         // dp[i][diff] = number of arithmetic subsequences
+//         // ending at index i with common difference = diff
+//         unordered_map<long long, int> dp[n];
+
+//         for (int i = 0; i < n; i++) {
+//             for (int j = 0; j < i; j++) {
+//                 long long difference = (long long)nums[i] - nums[j];
+
+//                 // Number of subsequences ending at j
+//                 // with the same difference
+//                 int existingSequences = 0;
+
+//                 if (dp[j].find(difference) != dp[j].end()) {
+//                     existingSequences = dp[j][difference];
+//                 }
+
+//                 // +1 represents the new pair
+//                 // (nums[j], nums[i])
+//                 dp[i][difference] += existingSequences + 1;
+
+//                 // Only extend existing subsequences (length >= 2)
+//                 // to form valid arithmetic subsequences (length >= 3)
+//                 totalArithmeticSubsequences += existingSequences;
+//             }
+//         }
+
+//         return totalArithmeticSubsequences;
+//     }
+// };
+
 // https://leetcode.com/problems/longest-common-subsequence/
+
+// T.C => O(2^n * 2^m) => O(2^m+n)
+// S.C => O(m)
+
+// class Solution {
+// public:
+//     int solve(int i, int j, string text1, string text2) {
+//         if (i >= text1.length() || j >= text2.length()) {
+//             return 0;
+//         }
+
+//         if (text1[i] == text2[j]) {
+//             return 1 + solve(i + 1, j + 1, text1, text2);
+//         }
+
+//         int excludeFromText1 = solve(i + 1, j, text1, text2);
+//         int excludeFromText2 = solve(i, j + 1, text1, text2);
+
+//         return max(excludeFromText1, excludeFromText2);
+//     };
+
+//     int longestCommonSubsequence(string text1, string text2) {
+//         return solve(0, 0, text1, text2);
+//     };
+// };
 
 // T.C => O(n*m)
 // S.C => O(n)
@@ -244,5 +307,139 @@
 //         memset(t, -1, sizeof(t));
         
 //         return LCS(text1, text2, m, n);
+//     }
+// };
+
+// class Solution {
+// public:
+//     int cache[1001][1001];
+//     int solve(int i, int j, string& text1, string& text2) {
+//         if (i >= text1.length() || j >= text2.length()) {
+//             return 0;
+//         }
+
+//         if (cache[i][j] != -1) {
+//             return cache[i][j];
+//         }
+
+//         if (text1[i] == text2[j]) {
+//             return cache[i][j] = 1 + solve(i + 1, j + 1, text1, text2);
+//         }
+
+//         int excludeFromText1 = solve(i + 1, j, text1, text2);
+//         int excludeFromText2 = solve(i, j + 1, text1, text2);
+
+//         return cache[i][j] = max(excludeFromText1, excludeFromText2);
+//     };
+
+//     int longestCommonSubsequence(string text1, string text2) {
+
+//         memset(cache, -1, sizeof(cache));
+//         return solve(0, 0, text1, text2);
+//     };
+// };
+
+// https://leetcode.com/problems/ugly-number/description/
+
+// T.C => O(n * log n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     bool isUgly(int n) {
+//         if (n < 0)
+//             return false;
+
+//         while (n > 1) {
+//             if (n % 2 == 0) {
+//                 n = n / 2;
+//             } else if (n % 3 == 0) {
+//                 n = n / 3;
+//             } else if (n % 5 == 0) {
+//                 n = n / 5;
+//             } else {
+//                 return false;
+//             }
+//         }
+
+//         return n == 1;
+//     }
+// };
+
+// https://leetcode.com/problems/ugly-number-ii/description/
+
+// Note:- This solution will give TLE.
+
+// class Solution {
+// public:
+//     unordered_map<int, bool> mp;
+//     bool isUgly(int n) {
+//         if (n <= 0)
+//             return false;
+//         if (n == 1)
+//             return true;
+
+//         if (mp.find(n) != mp.end())
+//             return mp[n];
+
+//         if (n % 2 == 0 && isUgly(n / 2))
+//             return mp[n] = true;
+//         else if (n % 3 == 0 && isUgly(n / 3))
+//             return mp[n] = true;
+//         else if (n % 5 == 0 && isUgly(n / 5))
+//             return mp[n] = true;
+
+//         return mp[n] = false;
+//     };
+
+//     int nthUglyNumber(int n) {
+//         mp.clear();
+//         int num = 1;
+
+//         while (n > 0) {
+//             if (isUgly(num)) {
+//                 n--;
+//             }
+//             num++;
+//         }
+
+//         return num - 1;
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int nthUglyNumber(int n) {
+//         vector<int> ans(n + 1);
+
+//         ans[1] = 1;
+
+//         int i2;
+//         int i3;
+//         int i5;
+
+//         i2 = i3 = i5 = 1;
+
+//         for (int i = 2; i <= n; i++) {
+//             int i2th_ugly = ans[i2] * 2;
+//             int i3rd_ugly = ans[i3] * 3;
+//             int i5th_ugly = ans[i5] * 5;
+
+//            ans[i] = min({i2th_ugly, i3rd_ugly, i5th_ugly});
+
+//             if (ans[i] == i2th_ugly)
+//                 i2++;
+
+//             if (ans[i] == i3rd_ugly)
+//                 i3++;
+
+//             if (ans[i] == i5th_ugly)
+//                 i5++;
+//         }
+
+//         return ans[n];
 //     }
 // };
