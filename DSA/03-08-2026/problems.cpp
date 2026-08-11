@@ -522,3 +522,110 @@
 //         return arr[n];
 //     }
 // };
+
+// https://leetcode.com/problems/flip-string-to-monotone-increasing/
+
+// T.C => O(2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int solve(int curr, int prev, int n, string& s) {
+//         if (curr >= n) {
+//             return 0;
+//         };
+
+//         int flip = INT_MAX;
+//         int noFlip = INT_MAX;
+
+//         if (s[curr] == '1') {
+//             if (prev == 0) {
+//                 flip = 1 + solve(curr + 1, 0, n, s);
+//                 noFlip = solve(curr + 1, 1, n, s);
+//             } else {
+//                 noFlip = solve(curr + 1, 1, n, s);
+//             }
+//         } else if (s[curr] == '0') {
+//             if (prev == 0) {
+//                 flip = 1 + solve(curr + 1, 1, n, s);
+//                 noFlip = solve(curr + 1, 0, n, s);
+//             } else {
+//                flip = 1 + solve(curr + 1, 1, n, s);
+//             }
+//         }
+
+//         return min(flip, noFlip);
+//     }
+
+//     int minFlipsMonoIncr(string s) {
+//         int n = s.length();
+
+//         return solve(0, 0, n, s);
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int solve(int curr, int prev, int n, string& s,
+//               vector<vector<int>>& cache) {
+//         if (curr >= n) {
+//             return 0;
+//         };
+
+//         int flip = INT_MAX;
+//         int noFlip = INT_MAX;
+
+//         if (cache[curr][prev] != -1) {
+//             return cache[curr][prev];
+//         }
+
+//         if (s[curr] == '1') {
+//             if (prev == 0) {
+//                 flip = 1 + solve(curr + 1, 0, n, s, cache);
+//                 noFlip = solve(curr + 1, 1, n, s, cache);
+//             } else {
+//                 noFlip = solve(curr + 1, 1, n, s, cache);
+//             }
+//         } else if (s[curr] == '0') {
+//             if (prev == 0) {
+//                 flip = 1 + solve(curr + 1, 1, n, s, cache);
+//                 noFlip = solve(curr + 1, 0, n, s, cache);
+//             } else {
+//                 flip = 1 + solve(curr + 1, 1, n, s, cache);
+//             }
+//         }
+
+//         return cache[curr][prev] = min(flip, noFlip);
+//     }
+
+//     int minFlipsMonoIncr(string s) {
+//         int n = s.length();
+//         vector<vector<int>> cache(n + 1, vector<int>(2, -1));
+
+//         return solve(0, 0, n, s, cache);
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(1)
+
+// class Solution {
+// public:
+//     int minFlipsMonoIncr(string s) {
+//         int countOfOnes = 0;
+//         int totalFlips = 0;
+
+//         for (int i = 0; i < s.length(); i++) {
+//             if (s[i] == '1') {
+//                 countOfOnes++;
+//             } else if (s[i] == '0') {
+//                 totalFlips = min(totalFlips + 1, countOfOnes);
+//             }
+//         }
+
+//         return totalFlips;
+//     }
+// };
