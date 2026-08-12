@@ -629,3 +629,93 @@
 //         return totalFlips;
 //     }
 // };
+
+// https://leetcode.com/problems/reducing-dishes/
+
+// T.C => O(2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int solve(int i, int t, int n, vector<int>& satisfaction) {
+//         if (i == n)
+//             return 0;
+
+//         int include =
+//             satisfaction[i] * t + solve(i + 1, t + 1, n, satisfaction);
+//         int exclude = solve(i + 1, t, n, satisfaction);
+
+//         return max(include, exclude);
+//     }
+
+//     int maxSatisfaction(vector<int>& satisfaction) {
+//         int n = satisfaction.size();
+
+//         sort(begin(satisfaction), end(satisfaction));
+//         return solve(0, 1, n, satisfaction);
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int solve(int i, int t, int n, vector<int>& satisfaction,
+//               vector<vector<int>>& cache) {
+//         if (i == n)
+//             return 0;
+
+//         if (cache[t][i] != -1) {
+//             return cache[t][i];
+//         }
+
+//         int include =
+//             satisfaction[i] * t + solve(i + 1, t + 1, n, satisfaction, cache);
+//         int exclude = solve(i + 1, t, n, satisfaction, cache);
+
+//         return cache[t][i] = max(include, exclude);
+//     }
+
+//     int maxSatisfaction(vector<int>& satisfaction) {
+//         int n = satisfaction.size();
+//         vector<vector<int>> cache(n + 1, vector<int>(n + 1, -1));
+
+//         sort(begin(satisfaction), end(satisfaction));
+//         return solve(0, 1, n, satisfaction, cache);
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int maxSatisfaction(vector<int>& satisfaction) {
+//         sort(satisfaction.begin(), satisfaction.end());
+//         vector<vector<long long>> arr(501, vector<long long>(501, INT_MIN));
+
+//         int n = satisfaction.size();
+
+//         for (int i = 0; i < 501; i++) {
+//             arr[i][0] = 0;
+//         }
+
+//         arr[0][1] = satisfaction[0] * 1;
+//         for (int i = 1; i < n; i++) {
+//             for (int t = 1; t <= n; t++) {
+//                 long long include = satisfaction[i] * t + arr[i - 1][t - 1];
+//                 long long exclude = 0 + arr[i - 1][t];
+
+//                 arr[i][t] = max(include, exclude);
+//             }
+//         }
+
+//         long long ans = 0;
+//         for (int t = 1; t <= n; t++) {
+//             ans = max(ans, arr[n - 1][t]);
+//         }
+
+//         return ans;
+//     }
+// };
