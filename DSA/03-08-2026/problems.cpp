@@ -805,3 +805,92 @@
 //         return solve(s1, s2);
 //     }
 // };
+
+// https://leetcode.com/problems/longest-palindromic-subsequence
+
+// T.C => O(2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int LPS(string& s, int i, int j) {
+//         if (i > j)
+//             return 0;
+        
+//         if (i == j)
+//             return 1;
+
+//         if (s[i] == s[j])
+//             return 2 + LPS(s, i + 1, j - 1);
+//         else
+//             return max(LPS(s, i + 1, j), LPS(s, i, j - 1));
+//     }
+
+//     int longestPalindromeSubseq(string s) {
+//         int m = s.length();
+//         return LPS(s, 0, m - 1);
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int cache[1001][1001];
+//     int LPS(string& s, int i, int j) {
+//         if(i > j)
+//             return 0;
+//         if(i == j)
+//             return 1;
+        
+//         if(cache[i][j] != -1)
+//             return cache[i][j];
+//         if(s[i] == s[j])
+//             return cache[i][j] = 2 + LPS(s, i+1, j-1);
+//         else
+//             return cache[i][j] = max(LPS(s, i+1, j), LPS(s, i, j-1));
+//     }
+    
+//     int longestPalindromeSubseq(string s) {
+//         int m = s.length();
+        
+//         memset(cache, -1, sizeof(cache));
+//         return LPS(s, 0, m-1);
+//     }
+// };
+
+// T.C => O(n*n)
+// S.C => O(n*n)
+
+// class Solution {
+// public:
+//     int longestPalindromeSubseq(string s) {
+//         int n = s.length();
+//         vector<vector<int>> dp(n, vector<int>(n, 0));
+
+//         // Every single character is a palindrome of length 1
+//         for (int i = 0; i < n; i++) {
+//             dp[i][i] = 1;
+//         }
+
+//         // Consider all substring lengths from 2 to n
+//         for (int length = 2; length <= n; length++) {
+//             // Try every possible starting index
+//             for (int start = 0; start + length - 1 < n; start++) {
+//                 int end = start + length - 1;
+
+//                 // Both characters match
+//                 if (s[start] == s[end]) {
+//                     dp[start][end] = 2 + dp[start + 1][end - 1];
+//                 } else {
+//                     // Skip either left or right character
+//                     dp[start][end] =
+//                         max(dp[start + 1][end], dp[start][end - 1]);
+//                 }
+//             }
+//         }
+
+//         return dp[0][n - 1];
+//     }
+// };
