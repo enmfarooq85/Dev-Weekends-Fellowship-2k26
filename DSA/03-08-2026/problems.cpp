@@ -687,7 +687,7 @@
 // };
 
 // T.C => O(n)
-// S.C => O(n)
+// S.C => O(n * k)
 
 // class Solution {
 // public:
@@ -833,7 +833,7 @@
 // };
 
 // T.C => O(n)
-// S.C => O(n)
+// S.C => O(n * k)
 
 // class Solution {
 // public:
@@ -892,5 +892,79 @@
 //         }
 
 //         return dp[0][n - 1];
+//     }
+// };
+
+// https://leetcode.com/problems/maximum-value-of-k-coins-from-piles
+
+// T.C => O(2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int n;
+//     int solve(int i, vector<vector<int>>& piles, int k) {
+//         if(i >= n)
+//             return 0;
+
+//         int remove = solve(i+1, piles, k);
+//         int add = 0;
+        
+//         int sum = 0;
+//         for(int j = 0; j < min((int)piles[i].size(), k); j++) {
+//             sum += piles[i][j];
+            
+//             if(k - (j+1) >= 0) {
+//                 add = max(add, sum + solve(i+1, piles, k-(j+1)));
+//             }
+//         }
+        
+//         return max(add, remove);
+//     }
+    
+//     int maxValueOfCoins(vector<vector<int>>& piles, int k) {
+//         n = piles.size();
+
+//         return solve(0, piles, k);
+        
+//     }
+// };
+
+// T.C => O(n * k)
+// S.C => O(n * k)
+
+// class Solution {
+// public:
+//     int n;
+//     int cache[1001][2001];
+    
+//     int solve(int i, vector<vector<int>>& piles, int k) {
+//         if (i >= n)
+//             return 0;
+
+//         if (cache[i][k] != -1) {
+//             return cache[i][k];
+//         }
+
+//         int remove = solve(i + 1, piles, k);
+//         int add = 0;
+
+//         int sum = 0;
+//         for (int j = 0; j < min((int)piles[i].size(), k); j++) {
+//             sum += piles[i][j];
+
+//             if (k - (j + 1) >= 0) {
+//                 add = max(add, sum + solve(i + 1, piles, k - (j + 1)));
+//             }
+//         }
+
+//         return cache[i][k] = max(add, remove);
+//     }
+
+//     int maxValueOfCoins(vector<vector<int>>& piles, int k) {
+//         n = piles.size();
+//         memset(cache, -1, sizeof(cache));
+
+//         return solve(0, piles, k);
 //     }
 // };
