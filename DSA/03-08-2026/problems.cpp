@@ -968,3 +968,119 @@
 //         return solve(0, piles, k);
 //     }
 // };
+
+// T.C => O(n * k)
+// S.C => O(n * k)
+
+// class Solution {
+// public:
+//     int maxValueOfCoins(vector<vector<int>>& piles, int k) {
+//         int n = piles.size();
+//         vector<vector<int>> t(n + 1, vector<int>(k + 1));
+
+//         for (int i = 1; i <= n; i++) {
+//             for (int coins = 0; coins <= k; coins++) {
+//                 int sum = 0;
+//                 for (int currCoins = 0;
+//                      currCoins <= min((int)piles[i - 1].size(), coins);
+//                      currCoins++) {
+//                     if (currCoins > 0)
+//                         sum += piles[i - 1][currCoins - 1];
+//                     t[i][coins] =
+//                         max(t[i][coins], sum + t[i - 1][coins - currCoins]);
+//                 }
+//             }
+//         }
+
+//         return t[n][k];
+//     }
+// };
+
+// https://leetcode.com/problems/restore-the-array
+
+// T.C => O(2^n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int n;
+//     const int MOD = 1000000007;
+
+//     int solve(int start, string& s, int k) {
+//         if (start == n) {
+//             return 1;
+//         }
+
+//         if (s[start] == '0') {
+//             return 0;
+//         }
+
+//         long long number = 0;
+//         long long ways = 0;
+
+//         for (int end = start; end < n; end++) {
+            
+//             number = number * 10 + (s[end] - '0');
+
+//             if (number > k) {
+//                 break;
+//             }
+
+//             ways = (ways + solve(end + 1, s, k)) % MOD;
+//         }
+
+//         return ways;
+//     }
+
+//     int numberOfArrays(string s, int k) {
+//         n = s.length();
+
+//         return solve(0, s, k);
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int n;
+//     const int MOD = 1000000007;
+
+//     int solve(int start, string& s, int k, vector<int>& cache) {
+//         if (start >= n) {
+//             return 1;
+//         }
+
+//         if (cache[start] != -1) {
+//             return cache[start];
+//         }
+
+//         if (s[start] == '0') {
+//             return 0;
+//         }
+
+//         long long number = 0;
+//         long long ways = 0;
+
+//         for (int end = start; end < n; end++) {
+
+//             number = number * 10 + (s[end] - '0');
+
+//             if (number > k) {
+//                 break;
+//             }
+
+//             ways = (ways + solve(end + 1, s, k, cache)) % MOD;
+//         }
+
+//         return cache[start] = ways;
+//     }
+
+//     int numberOfArrays(string s, int k) {
+//         n = s.length();
+//         vector<int> cache(n, -1);
+
+//         return solve(0, s, k, cache);
+//     }
+// };
