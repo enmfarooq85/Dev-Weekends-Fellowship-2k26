@@ -1084,3 +1084,111 @@
 //         return solve(0, s, k, cache);
 //     }
 // };
+
+// https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary
+
+// T.C => O(2^k)
+// S.C => O(k)
+
+// class Solution {
+// public:
+//     int m;
+//     int k;
+//     const int MOD = 1000000000 + 7;
+
+//     int solve(
+//         int i,
+//         int j,
+//         vector<vector<long long>>& freq,
+//         string& target
+//     ) {
+//         // Target completely formed
+//         if (i == m)
+//             return 1;
+
+//         // No more columns available
+//         if (j == k)
+//             return 0;
+
+//         // Use current column
+//         int include =
+//             (freq[target[i] - 'a'][j] *
+//              solve(i + 1, j + 1, freq, target)) % MOD;
+
+//         // Skip current column
+//         int exclude =
+//             solve(i, j + 1, freq, target) % MOD;
+
+//         return (include + exclude) % MOD;
+//     }
+
+//     int numWays(vector<string>& words, string target) {
+//         m = target.length();
+//         k = words[0].size();
+
+//         vector<vector<long long>> freq(
+//             26,
+//             vector<long long>(k)
+//         );
+
+//         for (int col = 0; col < k; col++) {
+//             for (string& word : words) {
+//                 freq[word[col] - 'a'][col]++;
+//             }
+//         }
+
+//         return solve(0, 0, freq, target);
+//     }
+// };
+
+// T.C => O(n*k+m*k)
+// S.C => O(m * k)
+
+// class Solution {
+// public:
+//     int m;
+//     int k;
+//     const int MOD = 1000000000 + 7;
+//     int cache[1001][1001];
+
+//     int solve(int i, int j, vector<vector<long long>>& freq, string& target) {
+//         // Target completely formed
+//         if (i == m)
+//             return 1;
+
+//         // No more columns available
+//         if (j == k)
+//             return 0;
+
+//         if (cache[i][j] != -1){
+//             return cache[i][j];
+//         }
+
+//         // Use current column
+//         int include =
+//             (freq[target[i] - 'a'][j] * solve(i + 1, j + 1, freq, target)) %
+//             MOD;
+
+//         // Skip current column
+//         int exclude = solve(i, j + 1, freq, target) % MOD;
+
+//         return cache[i][j] = (include + exclude) % MOD;
+//     }
+
+//     int numWays(vector<string>& words, string target) {
+//         m = target.length();
+//         k = words[0].size();
+
+//         vector<vector<long long>> freq(26, vector<long long>(k));
+
+//         for (int col = 0; col < k; col++) {
+//             for (string& word : words) {
+//                 freq[word[col] - 'a'][col]++;
+//             }
+//         }
+
+//         memset(cache, -1, sizeof(cache));
+
+//         return solve(0, 0, freq, target);
+//     }
+// };
