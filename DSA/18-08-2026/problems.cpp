@@ -54,7 +54,7 @@
 //         ListNode* evenHead = even;
 
 //         while (even && even->next) {
-            
+
 //             odd->next = even->next;
 //             odd = odd->next;
 
@@ -202,5 +202,30 @@
 //         }
 
 //         return result;
+//     }
+// };
+
+// https://leetcode.com/problems/linked-list-components
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int numComponents(ListNode* head, vector<int>& nums) {
+//         unordered_set<int> st(nums.begin(), nums.end());
+
+//         int components = 0;
+
+//         while (head) {
+//             if (st.count(head->val) &&
+//                 (head->next == nullptr || !st.count(head->next->val))) {
+//                 components++;
+//             }
+
+//             head = head->next;
+//         }
+
+//         return components;
 //     }
 // };
