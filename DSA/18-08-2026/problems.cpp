@@ -229,3 +229,55 @@
 //         return components;
 //     }
 // };
+
+// https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     vector<int> nodesBetweenCriticalPoints(ListNode* head) {
+//         if (head == NULL || head->next == NULL || head->next->next == NULL) {
+//             return {-1, -1};
+//         }
+//         // you can say that we are starting from node 2 because first will not be always critical point as well as last 
+//         ListNode* prev = head;
+//         ListNode* curr = head->next;
+//         ListNode* next = curr->next;
+
+//         vector<int> criticalPoints;
+//         int count = 1;
+
+//         while (next != nullptr) {
+//             if (curr->val > prev->val && curr->val > next->val) {
+//                 // Local Maxima
+//                 criticalPoints.push_back(count);
+//             } else if (curr->val < prev->val && curr->val < next->val) {
+//                 // Local Minima
+//                 criticalPoints.push_back(count);
+//             }
+
+//             count++;
+
+//             prev = curr;
+//             curr = curr->next;
+//             next = curr->next;
+//         }
+
+//         if (criticalPoints.size() < 2) {
+//             return {-1, -1};
+//         }
+
+//         int minDistance = INT_MAX;
+//         // maximum will be must of always of last and first
+//         int maxDistance = criticalPoints.back() - criticalPoints.front();
+
+//         for (int i = 1; i < criticalPoints.size(); i++) {
+//             int distance = criticalPoints[i] - criticalPoints[i - 1];
+//             minDistance = min(minDistance, distance);
+//         }
+
+//         return {minDistance, maxDistance};
+//     }
+// };
