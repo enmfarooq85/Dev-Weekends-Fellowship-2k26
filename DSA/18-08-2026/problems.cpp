@@ -281,3 +281,50 @@
 //         return {minDistance, maxDistance};
 //     }
 // };
+
+// https://leetcode.com/problems/linked-list-in-binary-tree/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     // Check if linked list matches starting from this tree node
+//     bool check(ListNode* head, TreeNode* root) {
+
+//         // Linked list completely matched
+//         if (head == nullptr)
+//             return true;
+
+//         // Tree ended before linked list
+//         if (root == nullptr)
+//             return false;
+
+//         // Current values don't match
+//         if (head->val != root->val)
+//             return false;
+
+//         // Continue either left or right
+//         return check(head->next, root->left) ||
+//                check(head->next, root->right);
+//     }
+
+//     bool isSubPath(ListNode* head, TreeNode* root) {
+
+//         // Empty linked list always exists
+//         if (head == nullptr)
+//             return true;
+
+//         // Tree is empty
+//         if (root == nullptr)
+//             return false;
+
+//         // Try starting from current node
+//         if (check(head, root))
+//             return true;
+
+//         // Otherwise try every node in left and right subtree
+//         return isSubPath(head, root->left) ||
+//                isSubPath(head, root->right);
+//     }
+// };
