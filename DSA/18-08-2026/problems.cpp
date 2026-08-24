@@ -241,7 +241,7 @@
 //         if (head == NULL || head->next == NULL || head->next->next == NULL) {
 //             return {-1, -1};
 //         }
-//         // you can say that we are starting from node 2 because first will not be always critical point as well as last 
+//         // you can say that we are starting from node 2 because first will not be always critical point as well as last
 //         ListNode* prev = head;
 //         ListNode* curr = head->next;
 //         ListNode* next = curr->next;
@@ -328,3 +328,111 @@
 //                isSubPath(head, root->right);
 //     }
 // };
+
+// https://leetcode.com/problems/design-twitter
+
+// T = relevant tweets for a feed
+// N = total tweets stored
+// E = total follow relationships
+
+// T.C => O(T log T)
+// S.C => O(N + E)
+
+// class Twitter {
+// public:
+//     // userId -> {tweetId, timestamp}
+//     map<int, vector<pair<int, int>>> tweetsMp;
+
+//     // followerId -> followeeIds
+//     // followerId mtlb jis ne follow kia hua hy
+//     // followeeId mtlb jis ko follow kia hua hy
+//     map<int, vector<int>> following;
+
+//     // timestamp so that we can sort the newest tweets
+//     int timestamp;
+
+//     Twitter() { timestamp = 1; }
+
+//     void postTweet(int userId, int tweetId) {
+//         tweetsMp[userId].push_back({tweetId, timestamp});
+//         timestamp++;
+//     }
+
+//     vector<int> getNewsFeed(int userId) {
+//         // This will contain tweets from:
+//         // User himself
+//         // Everyone he follows
+//         vector<pair<int, int>> allTweets;
+
+//         // Add user's own tweets
+//         if (tweetsMp.find(userId) != tweetsMp.end()) {
+//             for (auto tweet : tweetsMp[userId]) {
+//                 allTweets.push_back(tweet);
+//             }
+//         }
+
+//         // Add tweets of followees
+//         if (following.find(userId) != following.end()) {
+//             for (int followeeId : following[userId]) {
+//                 if (tweetsMp.find(followeeId) == tweetsMp.end())
+//                     continue;
+
+//                 for (auto tweet : tweetsMp[followeeId]) {
+//                     allTweets.push_back(tweet);
+//                 }
+//             }
+//         }
+
+//         // Sort newest -> oldest
+//         sort(allTweets.begin(), allTweets.end(),
+//              [](const pair<int, int>& a, const pair<int, int>& b) {
+//                  return a.second > b.second;
+//              });
+
+//         // Return maximum 10 tweets
+//         vector<int> result;
+//         for (int i = 0; i < min(10, (int)allTweets.size()); i++) {
+//             result.push_back(allTweets[i].first);
+//         }
+
+//         return result;
+//     }
+
+//     void follow(int followerId, int followeeId) {
+//         // Don't allow following yourself
+//         if (followerId == followeeId)
+//             return;
+
+//         // If already following, don't add duplicate
+//         for (int id : following[followerId]) {
+//             if (id == followeeId)
+//                 return;
+//         }
+
+//         // now just add follower
+//         following[followerId].push_back(followeeId);
+//     }
+
+//     void unfollow(int followerId, int followeeId) {
+//         // if the followerId not found return nothing
+//         if (following.find(followerId) == following.end())
+//             return;
+
+//         // if found then unfollow it
+//         vector<int>& followees = following[followerId];
+//         for (auto it = followees.begin(); it != followees.end(); it++) {
+//             if (*it == followeeId) {
+//                 followees.erase(it);
+//                 return;
+//             }
+//         }
+//     }
+// };
+/**
+ * Your Twitter object will be instantiated and called as such:
+ * Twitter* obj = new Twitter();
+ * obj->postTweet(userId,tweetId);
+ * vector<int> param_2 = obj->getNewsFeed(userId);
+ * obj->follow(followerId,followeeId);
+ * obj->unfollow(followerId,followeeId);
+ */
