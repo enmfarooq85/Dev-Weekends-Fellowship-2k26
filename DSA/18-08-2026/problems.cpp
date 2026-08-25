@@ -436,3 +436,49 @@
  * obj->follow(followerId,followeeId);
  * obj->unfollow(followerId,followeeId);
  */
+
+// https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/
+
+// T.C => O(N * M * log(N * M))
+// S.C => O(N * M)
+
+// class Solution {
+// public:
+//     int kthSmallest(vector<vector<int>>& matrix, int k) {
+//         vector<int> flat;
+
+//         for (auto row : matrix) {
+//             for (auto num : row) {
+//                 flat.push_back(num);
+//             }
+//         }
+
+//         sort(flat.begin(), flat.end());
+
+//         return flat[k - 1];
+//     }
+// };
+
+// T.C => O(N * M * log(K))
+// S.C => O(K)
+
+// class Solution {
+// public:
+//     int kthSmallest(vector<vector<int>>& matrix, int k) {
+//         priority_queue<int> pq;
+
+//         int n = matrix.size(); int m = matrix[0].size();
+
+//         for (int i = 0; i < n; i++){
+//             for (int j = 0; j < m; j++){
+//                 pq.push(matrix[i][j]);
+
+//                 if (pq.size() > k) {
+//                     pq.pop();
+//                 }
+//             }
+//         }
+
+//         return pq.top();
+//     }
+// };
