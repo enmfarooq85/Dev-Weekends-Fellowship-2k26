@@ -482,3 +482,100 @@
 //         return pq.top();
 //     }
 // };
+
+// https://leetcode.com/problems/find-median-from-data-stream
+
+// T.C => O(N ^ 2)
+// S.C => O(1)
+
+// class MedianFinder {
+// public:
+//     vector<int> arr;
+
+//     MedianFinder() {}
+
+//     void addNum(int num) { arr.push_back(num); }
+
+//     double findMedian() {
+//         int length = arr.size();
+//         sort(arr.begin(), arr.end());
+
+//         if (length % 2 == 0) {
+//             // even
+//             int i = 0;
+//             int j = length - 1;
+
+//             while (i < j) {
+//                 i++;
+//                 j--;
+//             };
+
+//             return (arr[i - 1] + arr[j + 1]) / 2.0;
+//         }
+
+//         // odd
+//         int i = 0;
+//         int j = length - 1;
+
+//         while (i < j) {
+//             i++;
+//             j--;
+//         };
+
+//         return arr[i];
+//     }
+// };
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */
+
+// T.C => O(N log)
+// S.C => O(n)
+
+// class MedianFinder {
+// public:
+//     priority_queue<int> leftMaxHeap;
+//     priority_queue<int, vector<int>, greater<int>> rightMinHeap;
+
+//     MedianFinder() {}
+
+//     void addNum(int num) {
+//         if (leftMaxHeap.empty()) {
+//             leftMaxHeap.push(num);
+//         } else if (num <= leftMaxHeap.top()) {
+//             leftMaxHeap.push(num);
+//         } else {
+//             rightMinHeap.push(num);
+//         }
+
+//         // diff:
+//         if (abs((int)leftMaxHeap.size() - (int)rightMinHeap.size()) > 1) {
+//             rightMinHeap.push(leftMaxHeap.top());
+//             leftMaxHeap.pop();
+//         } else if (leftMaxHeap.size() < rightMinHeap.size()) {
+//             leftMaxHeap.push(rightMinHeap.top());
+//             rightMinHeap.pop();
+//         }
+//     }
+
+//     double findMedian() {
+//         // even
+//         if (leftMaxHeap.size() == rightMinHeap.size()) {
+//             return ((leftMaxHeap.top() + rightMinHeap.top()) / 2.0);
+//         }
+
+//         // odd
+//         return leftMaxHeap.top();
+//     }
+// };
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder* obj = new MedianFinder();
+ * obj->addNum(num);
+ * double param_2 = obj->findMedian();
+ */
