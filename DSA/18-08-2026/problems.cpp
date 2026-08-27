@@ -579,3 +579,48 @@
  * obj->addNum(num);
  * double param_2 = obj->findMedian();
  */
+
+// https://leetcode.com/problems/total-cost-to-hire-k-workers/
+
+// T.C => O(K + m * log m)
+// S.C => O(candidates)
+
+// class Solution {
+// public:
+//     long long totalCost(vector<int>& costs, int k, int candidates) {
+//         // Min Priority Queue:
+//         priority_queue<int, vector<int>, greater<int>> leftPq;
+//         priority_queue<int, vector<int>, greater<int>> rightPq;
+
+//         long long ans = 0;
+//         int i = 0, j = costs.size() - 1;
+//         int hired = 0;
+
+//         while (hired < k) {
+//             while (leftPq.size() < candidates && i <= j) {
+//                 leftPq.push(costs[i]);
+//                 i++;
+//             }
+
+//             while (rightPq.size() < candidates && j >= i) {
+//                 rightPq.push(costs[j]);
+//                 j--;
+//             }
+
+//             int minFromLeftPq = leftPq.size() > 0 ? leftPq.top() : INT_MAX;
+//             int minFromRightPq = rightPq.size() > 0 ? rightPq.top() : INT_MAX;
+
+//             if (minFromLeftPq <= minFromRightPq) {
+//                 ans += minFromLeftPq;
+//                 leftPq.pop();
+//             } else {
+//                 ans += minFromRightPq;
+//                 rightPq.pop();
+//             }
+
+//             hired++;
+//         }
+
+//         return ans;
+//     }
+// };
