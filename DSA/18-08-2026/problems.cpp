@@ -624,3 +624,40 @@
 //         return ans;
 //     }
 // };
+
+// https://leetcode.com/problems/top-k-frequent-elements
+
+
+// T.C => O(n log k)
+// S.C => O(n + k)
+
+// class Solution {
+// public:
+//     typedef pair<int, int> p;
+    
+//         vector<int> topKFrequent(vector<int>& nums, int k) {
+        
+//         //min-heap
+//         priority_queue<p, vector<p>, greater<p>> minHeap;
+        
+//         unordered_map<int, int> mp;
+//         for(int i : nums)
+//             mp[i]++;
+        
+//         for(auto it:mp) {
+//             minHeap.push({it.second, it.first});
+            
+//             if(minHeap.size() > k)
+//                 minHeap.pop();
+//         }
+        
+        
+//         vector<int> result;
+//         while(!minHeap.empty()) {
+//             result.push_back(minHeap.top().second);
+//             minHeap.pop();
+//         };
+
+//         return result;
+//     }
+// };
