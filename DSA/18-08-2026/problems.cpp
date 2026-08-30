@@ -664,7 +664,7 @@
 // https://leetcode.com/problems/task-scheduler
 
 // T.C => O(n)
-// S.C => O(n)
+// S.C => O(1)
 
 // class Solution {
 // public:
@@ -707,5 +707,109 @@
 //         }
 
 //         return time;
+//     }
+// };
+
+// https://leetcode.com/problems/reorganize-string/
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     string reorganizeString(string s) {
+//         vector<int> alphabetsMap(26, 0);
+
+//         for (char& ch : s) {
+//             alphabetsMap[ch - 'a']++;
+//             if (alphabetsMap[ch - 'a'] > (s.length() + 1) / (2)){
+//                 return "";
+//             }
+//         }
+
+//         priority_queue<pair<int, char>> maxHeap;
+
+//         for (char ch = 'a'; ch <= 'z'; ch++) {
+//             if (alphabetsMap[ch - 'a'] > 0) {
+//                 maxHeap.push({alphabetsMap[ch - 'a'], ch});
+//             }
+//         }
+
+//         string ans = "";
+//         while (maxHeap.size() >= 2) {
+//             auto a = maxHeap.top();
+//             ans += a.second;
+//             maxHeap.pop();
+//             a.first--;
+
+//             auto b = maxHeap.top();
+//             ans += b.second;
+//             maxHeap.pop();
+//             b.first--;
+
+//             if (a.first > 0 ){
+//                 maxHeap.push(a);
+//             }
+//             if (b.first > 0 ){
+//                 maxHeap.push(b);
+//             }
+//         }
+
+//         if (!maxHeap.empty()) {
+//             ans += maxHeap.top().second;
+//         }
+
+//         return ans;
+//     }
+// };
+
+// T.C => O(n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     string reorganizeString(string s) {
+//         vector<int> alphabetsFreqMap(26, 0);
+
+//         int maxFreq = INT_MIN;
+//         char charMaxFreq;
+
+//         for (char& ch : s) {
+//             alphabetsFreqMap[ch - 'a']++;
+
+//             if (alphabetsFreqMap[ch - 'a'] > maxFreq) {
+//                 maxFreq = alphabetsFreqMap[ch - 'a'];
+//                 charMaxFreq = ch;
+//             }
+
+//             if (alphabetsFreqMap[ch - 'a'] > (s.length() + 1) / (2)) {
+//                 return "";
+//             }
+//         }
+
+//         string ans(s.length(), ' ');
+//         int i = 0;
+
+//         while (alphabetsFreqMap[charMaxFreq - 'a'] > 0) {
+//             ans[i] = charMaxFreq;
+//             i += 2;
+//             alphabetsFreqMap[charMaxFreq - 'a']--;
+//         }
+
+//         for (char ch = 'a'; ch <= 'z'; ch++) {
+//             while (alphabetsFreqMap[ch - 'a'] > 0) {
+//                 // wrap around:
+//                 if (i >= s.length()) {
+//                     i = 1;
+//                 }
+
+//                 ans[i] = ch;
+
+//                 i += 2;
+//                 alphabetsFreqMap[ch - 'a']--;
+//             }
+//         }
+
+//         return ans;
 //     }
 // };
