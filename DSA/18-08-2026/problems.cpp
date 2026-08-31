@@ -813,3 +813,100 @@
 //         return ans;
 //     }
 // };
+
+// https://leetcode.com/problems/k-th-smallest-prime-fraction/
+
+// T.C =>  O(n^2 + n^2 log n^2)
+// S.C => O(n^2)
+
+// class Solution {
+// public:
+//     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+//         vector<int> ans(2, 0);
+//         // 0.5 => 1 / 2
+//         vector<pair<double, pair<int, int>>> fractions;
+//         int n = arr.size();
+
+//         for (int i = 0; i < n; i++) {
+//             for (int j = i + 1; j < n; j++) {
+//                 if (0 <= i && i < j && j < n) {
+//                     double fraction = (double)arr[i] / arr[j];
+
+//                     fractions.push_back({fraction, {arr[i], arr[j]}});
+//                 }
+//             }
+//         }
+
+//         sort(fractions.begin(), fractions.end());
+        
+//         // 0.5 => 1/2
+//         // fractions[k - 1].second.first => 1 => arr[i]
+//         // fractions[k - 1].second.second => 2 => arr[j]
+//         return {
+//             fractions[k - 1].second.first,
+//             fractions[k - 1].second.second
+//         };
+//     }
+// };
+
+// T.C =>  O(n^2 * log k)
+// S.C => O(n^2)
+
+// class Solution {
+// public:
+//     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+//         priority_queue<vector<double>> maxHeap;
+//         int n = arr.size();
+
+//         for (int i = 0; i < n - 1; i++) {
+//             for (int j = i + 1; j < n; j++) {
+//                 if (0 <= i && i < j && j < n) {
+//                     double fraction = (double)arr[i] / arr[j];
+
+//                     maxHeap.push(vector<double>{fraction, double(arr[i]),
+//                                                 double(arr[j])});
+
+//                     if (maxHeap.size() > k) {
+//                         maxHeap.pop();
+//                     }
+//                 }
+//             }
+//         }
+
+//         // it will be always kth smallest fraction
+//         return {int(maxHeap.top()[1]), int(maxHeap.top()[2])};
+//     }
+// };
+
+// T.C => O(n log n + k log n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     typedef vector<double> V;
+//     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
+//         priority_queue<V, vector<V>, greater<V>> pq;
+//         int n = arr.size();
+
+//         for (int i = 0; i < n; i++) {
+//             pq.push({(double)arr[i] / arr[n - 1], (double)i, (double)(n - 1)});
+//         }
+
+//         int smallest = 1;
+//         while (smallest < k) {
+//             V topSmallest = pq.top();
+//             pq.pop();
+
+//             int numeratorIndex = (int)topSmallest[1];
+//             int denominatorIndex = (int)topSmallest[2];
+
+//             pq.push({(double)arr[numeratorIndex] / arr[denominatorIndex - 1],
+//                      (double)numeratorIndex, (double)(denominatorIndex - 1)});
+
+//             smallest++;
+//         }
+
+//         V kthSmallest = pq.top();
+//         return {arr[(int)kthSmallest[1]], arr[(int)kthSmallest[2]]};
+//     }
+// };
