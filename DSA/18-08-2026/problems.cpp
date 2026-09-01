@@ -633,24 +633,23 @@
 // class Solution {
 // public:
 //     typedef pair<int, int> p;
-    
+
 //         vector<int> topKFrequent(vector<int>& nums, int k) {
-        
+
 //         //min-heap
 //         priority_queue<p, vector<p>, greater<p>> minHeap;
-        
+
 //         unordered_map<int, int> mp;
 //         for(int i : nums)
 //             mp[i]++;
-        
+
 //         for(auto it:mp) {
 //             minHeap.push({it.second, it.first});
-            
+
 //             if(minHeap.size() > k)
 //                 minHeap.pop();
 //         }
-        
-        
+
 //         vector<int> result;
 //         while(!minHeap.empty()) {
 //             result.push_back(minHeap.top().second);
@@ -838,7 +837,7 @@
 //         }
 
 //         sort(fractions.begin(), fractions.end());
-        
+
 //         // 0.5 => 1/2
 //         // fractions[k - 1].second.first => 1 => arr[i]
 //         // fractions[k - 1].second.second => 2 => arr[j]
@@ -908,5 +907,45 @@
 
 //         V kthSmallest = pq.top();
 //         return {arr[(int)kthSmallest[1]], arr[(int)kthSmallest[2]]};
+//     }
+// };
+
+// https://leetcode.com/problems/ipo
+
+// T.C => O(n log n)
+// S.C => O(n)
+
+// class Solution {
+// public:
+//     int findMaximizedCapital(int k, int w, vector<int>& profits,
+//                              vector<int>& capital) {
+//         vector<pair<int, int>> capitalProfit;
+//         int n = profits.size();
+
+//         for (int i = 0; i < n; i++) {
+//             capitalProfit.push_back({capital[i], profits[i]});
+//         }
+
+//         sort(capitalProfit.begin(), capitalProfit.end());
+
+//         priority_queue<int> maxHeap;
+//         int i = 0;
+//         while (k > 0) {
+//             while (i < n && capitalProfit[i].first <= w) {
+//                 maxHeap.push(capitalProfit[i].second);
+//                 i++;
+//             }
+
+//             if (maxHeap.empty()) {
+//                 break;
+//             };
+
+//             int profit = maxHeap.top();
+//             w += profit;
+//             maxHeap.pop();
+//             k--;
+//         }
+
+//         return w;
 //     }
 // };
